@@ -52,7 +52,7 @@ const BlogList = () => {
                               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                          </svg>
 
-                         <input onChange={(e)=>setSearchText(e.target.value)} value={searchText} onFocus={() => setFocous(true)} className="bg-transparent outline-none w-3/5" type="text" placeholder="Article name ..." />
+                         <input onChange={(e)=>setSearchText(e.target.value)} value={searchText} onFocus={() => setFocous(true)} className="bg-transparent outline-none w-3/5" type="text" placeholder="Article name ..." id="searchByTitle" />
                     </div>
 
                     <div className={`absolute -translate-x-[44px] sm:-translate-x-[52px] md:-translate-x-[64px] lg:-translate-x-[178px] mt-20 top-0 left-0 h-screen w-screen z-50 ${focus ? "block" : "hidden"}`}>

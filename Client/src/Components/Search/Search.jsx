@@ -4,10 +4,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
 import API from '../../Services/API';
+import LoadFilterBlog from '../Animation/LoadFilterBlog';
+import LaodTags from '../Animation/LaodTags';
 
 const Search = ({ text }) => {
      const noProfilePhoto = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-     const [selectedOption, setSelectedOption] = useState('tags');
+     const [selectedOption, setSelectedOption] = useState('writers');
      const [displayTags, setDisplayTags] = useState([]);
      const [displayWriters, setDisplayWriters] = useState([]);
      const [blogData, setBlogData] = useState([]);
@@ -15,6 +17,10 @@ const Search = ({ text }) => {
      const [selectTag, setSelectedTag] = useState(null);
      const [selectWriter, setSelectedWriter] = useState(null);
      const [filteredBlogs, setFilteredBlogs] = useState([]);
+
+     const [loadBlog, setLoadBlog] = useState(false)
+     const [LaodTag, setLoadTag] = useState(false)
+     const [LaodWriter, setLoadWriters] = useState(false)
 
      // Change between tags and writers filter
      const handleOptionChange = (event) => {
@@ -31,8 +37,9 @@ const Search = ({ text }) => {
                          const tags = response.data.response.response.flatMap(item => item.tags);
                          const uniqueTags = [...new Set(tags)];
                          setDisplayTags(uniqueTags);
-                    } else {
-                         toast.error("Failed to fetch tags");
+                         setTimeout(()=>{
+                              setLoadBlog(true)
+                         },4000)
                     }
                } catch (err) {
                     toast.error("Error fetching tags");
@@ -46,8 +53,9 @@ const Search = ({ text }) => {
                     const response = await API.post('/getAllWriterName');
                     if (response.data.response.success) {
                          setDisplayWriters(response.data.response.response);
-                    } else {
-                         toast.error("Failed to fetch writers");
+                         setTimeout(()=>{
+                              setLoadWriters(true)
+                         },4000)
                     }
                } catch (err) {
                     toast.error("Error fetching writers");
@@ -61,8 +69,9 @@ const Search = ({ text }) => {
                     const response = await API.post('/getAllBlogs');
                     if (response.data.response.success) {
                          setBlogData(response.data.response.response);
-                    } else {
-                         toast.error("Failed to fetch blogs");
+                         setTimeout(()=>{
+                              setLoadTag(true)
+                         },4000)
                     }
                } catch (err) {
                     toast.error("Error fetching blogs");
@@ -98,6 +107,7 @@ const Search = ({ text }) => {
                return fullName.startsWith(filterText);
           });
      };
+
      // Filter writer' name (by text box) filter
      const filterByText = (blogs) => {
           if (!text) return blogs;
@@ -108,13 +118,13 @@ const Search = ({ text }) => {
           });
      };
 
-    useEffect(() => {
-        let filtered = blogData;
-        filtered = filterByTag(filtered);
-        filtered = filterByWriter(filtered);
-        filtered = filterByText(filtered);
-        setFilteredBlogs(filtered);
-    }, [selectTag, selectWriter, text, blogData]);
+     useEffect(() => {
+          let filtered = blogData;
+          filtered = filterByTag(filtered);
+          filtered = filterByWriter(filtered);
+          filtered = filterByText(filtered);
+          setFilteredBlogs(filtered);
+     }, [selectTag, selectWriter, text, blogData]);
 
      return (
           <>
@@ -127,32 +137,35 @@ const Search = ({ text }) => {
                     <div>Search By</div>
                     <div>
                          <select id="search-option" name="search-option" className="bg-black text-white pl-2 outline-none border-l-2" required onChange={handleOptionChange}>
-                              <option value="tags">Tags</option>
                               <option value="writers">Writers</option>
+                              <option value="tags">Tags</option>
                          </select>
                     </div>
                </div>
 
                <div className="flex flex-wrap items-start justify-center px-3 pb-10">
-                    <div onClick={handleFilterToAll} className="relative px-5 py-2 m-2 bg-gray-200 rounded-full cursor-pointer select-none font-semibold tracking-wide shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 text-gray-900">
+                    <div onClick={handleFilterToAll} className="relative px-5 py-2 m-3 bg-gray-200 rounded-full cursor-pointer select-none font-semibold tracking-wide shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 text-gray-900">
                          <span className="text-sm">All</span>
                     </div>
-                    {selectedOption === 'tags' && displayTags.map((item, key) => (
-                         <div onClick={() => setSelectedTag(item)} key={key} className="relative px-5 py-2 m-2 bg-gray-200 rounded-full cursor-pointer select-none font-semibold tracking-wide shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 text-gray-900">
+                    {LaodWriter && selectedOption === 'tags' && displayTags.map((item, index) => (
+                         <div onClick={() => setSelectedTag(item)} key={index} className="relative px-5 py-2 m-2 bg-gray-200 rounded-full cursor-pointer select-none font-semibold tracking-wide shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 text-gray-900">
                               <span className="text-sm">{item}</span>
                          </div>
                     ))}
-                    {selectedOption === 'writers' && displayWriters.map((item, key) => (
-                         <div onClick={() => setSelectedWriter(item?.firstName)} key={key} className="flex place-content-center items-center space-x-3 relative px-5 py-2 m-2 bg-gray-200 rounded-full cursor-pointer select-none font-semibold tracking-wide shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 text-gray-900">
+                    {!LaodTag && selectedOption === 'tags' && (<LaodTags key={Math.random()}/>)}
+
+                    {LaodTag && selectedOption === 'writers' && displayWriters.map((item, index) => (
+                         <div onClick={() => setSelectedWriter(item?.firstName)} key={index} className="flex place-content-center items-center space-x-3 relative px-5 py-2 m-2 bg-gray-200 rounded-full cursor-pointer select-none font-semibold tracking-wide shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 text-gray-900">
                               <img src={item?.photo?.trim() !== "" ? item?.photo : noProfilePhoto} alt="authorImage" className='w-8 h-8 rounded-full bg-cover' />
                               <span className="text-sm capitalize">{`${item?.firstName} ${item?.lastName}`}</span>
                          </div>
                     ))}
+                    {!LaodWriter && selectedOption === 'writers' && (<LaodTags key={Math.random()} show={true}/>)}
                </div>
 
                <div className='gap-10 flex flex-wrap items-center place-content-center'>
-                    {filteredBlogs.map((items, key) => (
-                         <Link to={`/blogContent/${items._id}`} key={key} className="w-11/12 lg:w-1/5">
+                    {loadBlog && filteredBlogs.map((items, index) => (
+                         <Link to={`/blogContent/${items._id}`} key={index} className="w-11/12 lg:w-1/5">
                               <div className="shadow-md border border-gray-200 rounded-lg max-w-sm">
                                    <img className="rounded-t-lg h-48 w-full" src={items?.blogPhoto} alt="imageError" />
                                    <div className='flex items-center space-x-2 mt-3 pl-5'>
@@ -168,6 +181,9 @@ const Search = ({ text }) => {
                                    </div>
                               </div>
                          </Link>
+                    ))}
+                    {!loadBlog && Array.from({ length: 4 }).map((_, index) => (
+                         <LoadFilterBlog />
                     ))}
                </div>
           </>

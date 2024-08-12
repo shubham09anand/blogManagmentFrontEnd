@@ -94,7 +94,7 @@ const BlogEditor = () => {
                          <input type="text" name="name" id="name" placeholder="Title" className="w-full fontTitle bg-[#f7f4ed] py-2 px-6 pl-3 text-4xl font-medium outline-none focus:border-[#16831f] focus:shadow-md placeholder:tracking-wider" />
 
                          <div className="my-6">
-                              <label htmlFor="category" className="mb-2 font-semibold block text-lg">
+                              <label htmlFor="select" className="mb-2 font-semibold block text-lg">
                                    Category
                               </label>
                               <select name="select" id="select" className="block w-full rounded-sm border border-slate-300 bg-[#f7f4ed] px-3 py-3 font-semibold text-gray-500 shadow-sm focus:border-[#16831f] focus:outline-none sm:text-sm">
@@ -102,9 +102,9 @@ const BlogEditor = () => {
                               </select>
                          </div>
 
-                         <label htmlFor="tags" className="mb-2 font-semibold block text-lg">
+                         <div className="mb-2 font-semibold block text-lg">
                               Upload Images
-                         </label>
+                         </div>
                          <div className="flex items-center justify-center w-full">
                               <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-[#f7f4ed]">
                                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
@@ -138,9 +138,9 @@ const BlogEditor = () => {
 
                          <div className='mt-2'>
                               <div className='flex space-x-5'>
-                                   <label htmlFor="tags" className="my-2 font-semibold block text-lg">
+                                   <div className="my-2 font-semibold block text-lg">
                                         Add Tags Fits Blog
-                                   </label>
+                                   </div>
                                    {(tags.length < 5) && (
                                         <svg onClick={handleAddTagField} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5 mt-3.5 cursor-pointer">
                                              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -163,9 +163,9 @@ const BlogEditor = () => {
                          </div>
                     </div>
 
-                    <label htmlFor="content" className="mb-2 font-semibold block text-lg">
+                    <div className="mb-2 font-semibold block text-lg">
                          Content
-                    </label>
+                    </div>
                     <JoditEditor
                          config={config}
                          ref={editor}
