@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes expandWidth {
+     from {
+          width: 0;
+     }
+
+     to {
+          width: 200px;
+     }
+}
+
+.expand-width {
+     animation: expandWidth 1s ease-out forwards;
+}
+
+.font {
+     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+.fontTitle {
+     font-family: medium-content-title-font, Georgia, Cambria, "Times New Roman", Times, serif
+}
+
+.font_2 {
+     font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif
+}
+
+.jodit-status-bar-link {
+     display: none;
+}
+
+.jodit-wysiwyg {
+     background-color: #f7f4ed;
+     padding: 10px;
+}
+
+.jodit-ui-group {
+     background-color: #f7f4ed;
+}
+
+.jodit-status-bar_resize-handle_true {
+     background-color: #f7f4ed;
+}
