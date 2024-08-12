@@ -20,7 +20,7 @@ const Comment = () => {
                 } 
             } catch (err) {
                 toast.error("Failed to Load Comments");
-                console.log(err);
+                // console.log(err);
             }
         };
 

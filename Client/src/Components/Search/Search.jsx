@@ -36,7 +36,7 @@ const Search = () => {
                     }
                } catch (err) {
                     toast.error("Error fetching tags");
-                    console.log(err);
+                    // console.log(err);
                }
           };
 
@@ -51,7 +51,7 @@ const Search = () => {
                     }
                } catch (err) {
                     toast.error("Error fetching writers");
-                    console.log(err);
+                    // console.log(err);
                }
           };
 
@@ -66,7 +66,7 @@ const Search = () => {
                     }
                } catch (err) {
                     toast.error("Error fetching blogs");
-                    console.log(err);
+                    // console.log(err);
                }
           };
 

@@ -24,7 +24,7 @@ const BlogContent = () => {
                     }
                } catch (err) {
                     toast.error("Failed to Load Blogs");
-                    console.log(err);
+                    // console.log(err);
                }
           };
 

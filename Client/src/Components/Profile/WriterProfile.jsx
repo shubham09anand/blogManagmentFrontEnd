@@ -31,7 +31,7 @@ const WriterProfile = () => {
                     }
                } catch (err) {
                     toast.error("Failed to Load Blogs");
-                    console.log(err);
+                    // console.log(err);
                }
           };
 
@@ -49,7 +49,7 @@ const WriterProfile = () => {
                     }
                } catch (err) {
                     toast.error("Failed to Load Profile");
-                    console.log(err);
+                    // console.log(err);
                }
           };
 

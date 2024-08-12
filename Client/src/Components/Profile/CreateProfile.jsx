@@ -44,7 +44,7 @@ const CreateProfile = () => {
                tags,
                aboutYou
           };
-          console.log('Form Data:', formData);
+          // console.log('Form Data:', formData);
      };
 
      const handleImageChange = (e) => {

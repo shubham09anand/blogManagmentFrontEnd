@@ -9,11 +9,11 @@ const Home = () => {
         axios.post("http://localhost:4000/getAllMovie")
             .then(response => {
                 setData(response.data);
-                console.log('Data retrieved:', response.data);
+                // console.log('Data retrieved:', response.data);
             })
             .catch(error => {
                 setError(error.response || error.message);
-                console.error('Error fetching data:', error.response || error.message);
+                // console.error('Error fetching data:', error.response || error.message);
             });
     };
 
