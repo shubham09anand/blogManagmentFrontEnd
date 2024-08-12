@@ -7,8 +7,7 @@ const LandingPage = () => {
           <section className="bg-[#f7f4ed] min-h-screen flex">
                <div className="grid max-w-screen-xl px-4 lg:pl-20 pb-8 mx-auto md:mx-0 lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
                     <div className=" mr-auto place-self-center lg:col-span-7">
-                         <h1
-                              className="font max-w-2xl mb-4 text-8xl font-extralight leading-[75px] tracking-tight">
+                         <h1 className="font max-w-2xl mb-4 text-8xl font-extralight leading-[75px] tracking-tight">
                               Human stories & ideas
                          </h1>
 
