@@ -4,6 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import API from '../../Services/API';
 import moment from 'moment';
 import "../Style/CustomFont.css"
+import LoadBlog from '../Animation/LoadBlog';
 
 const WriterProfile = () => {
 
@@ -12,6 +13,7 @@ const WriterProfile = () => {
      const [showDelete, setShowDelete] = useState(null);
      const [userProfile, setUserProfile] = useState(null);
      const [blogs, setBlogs] = useState([]);
+     const [load, setLoad] = useState(false)
 
      const handleRemove = (index) => {
           setBlogs(blogs.filter((_, i) => i !== index));
@@ -28,6 +30,9 @@ const WriterProfile = () => {
                     const response = await API.get(`/getWriterBlog/${authorId}`);
                     if (response.data.response.success) {
                          setBlogs(response.data.response.response);
+                         setTimeout(() => {
+                              setLoad(true)
+                         }, 4000)
                     }
                } catch (err) {
                     toast.error("Failed to Load Blogs");
@@ -62,7 +67,7 @@ const WriterProfile = () => {
           <div className='flex flex-col-reverse lg:flex-row w-screen lg:px-40 mt-5'>
                <ToastContainer />
                <div className='h-screen w-full lg:w-2/3 p-2'>
-                    {blogs.map((items, key) => (
+                    {load && blogs.map((items, key) => (
                          <div key={key} className='border-gray-200 w-full flex mb-5 pb-4 00 border-b-2'>
                               <div>
                                    <div className="flex justify-start gap-2 flex-wrap pl-4">
@@ -125,6 +130,9 @@ const WriterProfile = () => {
                                    </Link>
                               </div>
                          </div>
+                    ))}
+                    {!load && Array.from({ length: 4 }).map((_, index) => (
+                         <LoadBlog show={true} key={index} />
                     ))}
                     {blogs.length === 0 &&
                          <Link to='/write' className='mx-auto w-fit'>

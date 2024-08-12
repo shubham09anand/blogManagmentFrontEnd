@@ -6,11 +6,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
 import API from '../../Services/API';
+import LoadBlog from '../Animation/LoadBlog';
 
 const BlogList = () => {
      const noProfilePhoto = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
      const [blogs, setBlogs] = useState([])
      const [focus, setFocous] = useState(false)
+     const [searchText, setSearchText] = useState("")
+     const [load, setLoad] = useState(false)
 
      useEffect(() => {
           const getAllTags = async () => {
@@ -18,6 +21,9 @@ const BlogList = () => {
                     const response = await API.post('/getAllBlogs');
                     if (response.data.response.success) {
                          setBlogs(response.data.response.response);
+                         setTimeout(()=>{
+                              setLoad(true)
+                         },4000)
                          // console.log(response.data.response.response);
                     } else {
                          toast.error("Failed to Load Blogs");
@@ -46,26 +52,26 @@ const BlogList = () => {
                               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                          </svg>
 
-                         <input onFocus={() => setFocous(true)} className="bg-transparent outline-none w-3/5" type="text" placeholder="Article name or keyword..." />
+                         <input onChange={(e)=>setSearchText(e.target.value)} value={searchText} onFocus={() => setFocous(true)} className="bg-transparent outline-none w-3/5" type="text" placeholder="Article name ..." />
                     </div>
 
                     <div className={`absolute -translate-x-[44px] sm:-translate-x-[52px] md:-translate-x-[64px] lg:-translate-x-[178px] mt-20 top-0 left-0 h-screen w-screen z-50 ${focus ? "block" : "hidden"}`}>
-                         <Search />
+                         <Search text={searchText} />
                     </div>
 
                </div>
 
 
-               <div className={`flex w-screen lg:px-40 mt-5 ${!focus ? "block" : "hidden"}`}>
+               <div className={`flex lg:px-40 mt-5 ${!focus ? "block" : "hidden"}`}>
                     <div className='lg:w-2/3 p-2 gap-y-4'>
-                         {blogs?.map((items, key) => (
+                         {load && blogs?.map((items, key) => (
                               <div key={key}>
                                    <div className="flex justify-start gap-2 flex-wrap pt-4 pl-4">
                                         {items?.tags.slice(0, 3).map((i, e) => (
                                              <span key={e} className="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-800">{i}</span>
                                         ))}
                                    </div>
-                                   <div className='border-gray-200 w-full flex pb-5 pt-3 00 border-b-2 border-opacity-35'>
+                                   <div className='border-gray-200 w-full flex pb-5 00 border-b-2 border-opacity-35'>
                                         <div>
                                              <div className="flex items-center mb-2 pl-4 py-4">
                                                   <img src={items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} className="h-8 w-8 rounded-full mr-2 object-cover border-2 border-black" alt="AuthorImage" />
@@ -92,6 +98,9 @@ const BlogList = () => {
                                         </div>
                                    </div>
                               </div>
+                         ))}
+                         {!load && Array.from({ length: 4 }).map((_, index) => (
+                               <LoadBlog key={index} />
                          ))}
                     </div>
                     <SideBar />

@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
 import API from '../../Services/API';
 
-const Search = () => {
+const Search = ({ text }) => {
      const noProfilePhoto = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
      const [selectedOption, setSelectedOption] = useState('tags');
      const [displayTags, setDisplayTags] = useState([]);
@@ -22,7 +22,7 @@ const Search = () => {
           handleFilterToAll()
      };
 
-     // Get all blog's tags
+     // Get all blog's tags and all writer's name and all blogs
      useEffect(() => {
           const getAllTags = async () => {
                try {
@@ -81,17 +81,40 @@ const Search = () => {
           setSelectedWriter(null);
      };
 
-     // Filter blogs by tag
-     useEffect(() => {
-          let filtered = blogData;
-          if (selectTag !== null) {
-               filtered = filtered.filter(blog => blog.tags.includes(selectTag));
-          }
-          if (selectWriter !== null && selectWriter !== '') {
-               filtered = filtered.filter(blog => blog.firstName.toLowerCase() === selectWriter.toLowerCase());
-          }
-          setFilteredBlogs(filtered);
-     }, [selectTag, selectWriter, blogData]);
+     // Apply tag filter
+     const filterByTag = (blogs) => {
+          if (selectTag === null) return blogs;
+          return blogs.filter(blog => blog.tags.includes(selectTag));
+     };
+
+     // Filter writer' name (by writer's name tags) filter
+     const filterByWriter = (blogs) => {
+          if (selectWriter === null || selectWriter === '') return blogs;
+
+          const filterText = selectWriter.toLowerCase();
+
+          return blogs.filter(blog => {
+               const fullName = `${blog.firstName} ${blog.lastName}`.toLowerCase();
+               return fullName.startsWith(filterText);
+          });
+     };
+     // Filter writer' name (by text box) filter
+     const filterByText = (blogs) => {
+          if (!text) return blogs;
+          const lowerText = text.toLowerCase();
+          return blogs.filter(blog => {
+               const title = blog.title.toLowerCase();
+               return title.startsWith(lowerText);
+          });
+     };
+
+    useEffect(() => {
+        let filtered = blogData;
+        filtered = filterByTag(filtered);
+        filtered = filterByWriter(filtered);
+        filtered = filterByText(filtered);
+        setFilteredBlogs(filtered);
+    }, [selectTag, selectWriter, text, blogData]);
 
      return (
           <>
