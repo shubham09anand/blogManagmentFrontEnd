@@ -68,7 +68,7 @@ const BlogList = () => {
                                    <div className='border-gray-200 w-full flex pb-5 pt-3 00 border-b-2 border-opacity-35'>
                                         <div>
                                              <div className="flex items-center mb-2 pl-4 py-4">
-                                                  <img src={items?.photo?.trim() != "" ? items?.photo : noProfilePhoto} className="h-8 w-8 rounded-full mr-2 object-cover border-2 border-black" alt="AuthorImage" />
+                                                  <img src={items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} className="h-8 w-8 rounded-full mr-2 object-cover border-2 border-black" alt="AuthorImage" />
                                                   <Link to={`/profile/${items?.authorId}`} className='flex place-content-center items-center space-x-6'>
                                                        <p className="fontTitle font-semibold text-sm capitalize">{items?.firstName} {items?.lastName}</p>
                                                        <p className="fontTitle text-sm font-medium">{moment(items?.createdAt).format('MMMM Do YYYY')}</p>

@@ -44,7 +44,7 @@ const BlogContent = () => {
                                    <address className="flex items-center mb-6 not-italic">
                                         <div to={`/profile/${"authorId"}`} className="inline-flex items-center mr-3 text-sm text-gray-900">
                                              <Link to={`/profile/${blog.authorId}`}>
-                                                  <img className="mr-4 w-14 h-14 rounded-full border-2 border-black" src={blog?.photo?.trim() != "" ? blog?.photo : noProfilePhoto} alt="Jese Leos" />
+                                                  <img className="mr-4 w-14 h-14 rounded-full border-2 border-black" src={blog?.photo?.trim() !== "" ? blog?.photo : noProfilePhoto} alt="Jese Leos" />
                                              </Link>
 
                                              <div>
