@@ -113,7 +113,7 @@ const Search = ({ text }) => {
           if (!text) return blogs;
           const lowerText = text.toLowerCase();
           return blogs.filter(blog => {
-               const title = blog.title.toLowerCase();
+               const title = blog.title.toLowerCase().trim();
                return title.startsWith(lowerText);
           });
      };
@@ -182,6 +182,7 @@ const Search = ({ text }) => {
                               </div>
                          </Link>
                     ))}
+                    {loadBlog && filteredBlogs.length === 0 && <div className='text-gray-600 font-thin fontTitle'>No Blogs Match</div>}
                     {!loadBlog && Array.from({ length: 4 }).map((_, index) => (
                          <LoadFilterBlog />
                     ))}
