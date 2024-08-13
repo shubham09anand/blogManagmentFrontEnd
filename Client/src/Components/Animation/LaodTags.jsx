@@ -2,7 +2,7 @@ import React from 'react'
 
 const LaodTags = ({ show }) => {
   return (
-    <div className='flex flex-wrap items-center gap-2 gap-x-4 mt-3 px-4'>
+    <div className='flex flex-wrap items-center gap-2 gap-x-4 -mt-6 px-4'>
       <div className='px-3 h-[40px] w-28 bg-gray-300 rounded-full animate-pulse flex place-content-center items-center'>
         {show &&
           <div className='flex place-content-center items-center justify-between w-full'>

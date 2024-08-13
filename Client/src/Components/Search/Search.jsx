@@ -37,9 +37,9 @@ const Search = ({ text }) => {
                          const tags = response.data.response.response.flatMap(item => item.tags);
                          const uniqueTags = [...new Set(tags)];
                          setDisplayTags(uniqueTags);
-                         setTimeout(()=>{
+                         setTimeout(() => {
                               setLoadBlog(true)
-                         },4000)
+                         }, 4000)
                     }
                } catch (err) {
                     toast.error("Error fetching tags");
@@ -53,9 +53,9 @@ const Search = ({ text }) => {
                     const response = await API.post('/getAllWriterName');
                     if (response.data.response.success) {
                          setDisplayWriters(response.data.response.response);
-                         setTimeout(()=>{
+                         setTimeout(() => {
                               setLoadWriters(true)
-                         },4000)
+                         }, 4000)
                     }
                } catch (err) {
                     toast.error("Error fetching writers");
@@ -69,9 +69,9 @@ const Search = ({ text }) => {
                     const response = await API.post('/getAllBlogs');
                     if (response.data.response.success) {
                          setBlogData(response.data.response.response);
-                         setTimeout(()=>{
+                         setTimeout(() => {
                               setLoadTag(true)
-                         },4000)
+                         }, 4000)
                     }
                } catch (err) {
                     toast.error("Error fetching blogs");
@@ -124,6 +124,7 @@ const Search = ({ text }) => {
           filtered = filterByWriter(filtered);
           filtered = filterByText(filtered);
           setFilteredBlogs(filtered);
+          // eslint-disable-next-line
      }, [selectTag, selectWriter, text, blogData]);
 
      return (
@@ -152,15 +153,19 @@ const Search = ({ text }) => {
                               <span className="text-sm">{item}</span>
                          </div>
                     ))}
-                    {!LaodTag && selectedOption === 'tags' && (<LaodTags key={Math.random()}/>)}
+                    {!LaodTag && selectedOption === 'tags' && (<LaodTags key={Math.random()} />)}
 
-                    {LaodTag && selectedOption === 'writers' && displayWriters.map((item, index) => (
-                         <div onClick={() => setSelectedWriter(item?.firstName)} key={index} className="flex place-content-center items-center space-x-3 relative px-5 py-2 m-2 bg-gray-200 rounded-full cursor-pointer select-none font-semibold tracking-wide shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 text-gray-900">
+                    {LaodWriter && selectedOption === 'tags' && displayTags.map((item,key) => (
+                         <div onClick={() => setSelectedTag(item)} key={key} className="relative px-5 py-2 m-2 bg-gray-200 rounded-full cursor-pointer select-none font-semibold tracking-wide shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 text-gray-900">
+                              <span className="text-sm">{item}</span>
+                         </div>
+                    ))}
+                    {LaodTag && selectedOption === 'writers' && displayWriters.map((item,key) => (
+                         <div onClick={() => setSelectedWriter(item?.firstName)} key={key} className="flex place-content-center items-center space-x-3 relative px-5 py-2 m-2 bg-gray-200 rounded-full cursor-pointer select-none font-semibold tracking-wide shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 text-gray-900">
                               <img src={item?.photo?.trim() !== "" ? item?.photo : noProfilePhoto} alt="authorImage" className='w-8 h-8 rounded-full bg-cover' />
                               <span className="text-sm capitalize">{`${item?.firstName} ${item?.lastName}`}</span>
                          </div>
                     ))}
-                    {!LaodWriter && selectedOption === 'writers' && (<LaodTags key={Math.random()} show={true}/>)}
                </div>
 
                <div className='gap-10 flex flex-wrap items-center place-content-center'>
@@ -184,7 +189,7 @@ const Search = ({ text }) => {
                     ))}
                     {loadBlog && filteredBlogs.length === 0 && <div className='text-gray-600 font-thin fontTitle'>No Blogs Match</div>}
                     {!loadBlog && Array.from({ length: 4 }).map((_, index) => (
-                         <LoadFilterBlog />
+                         <LoadFilterBlog key={index} />
                     ))}
                </div>
           </>

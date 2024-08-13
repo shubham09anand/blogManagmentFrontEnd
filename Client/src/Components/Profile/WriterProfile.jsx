@@ -5,6 +5,7 @@ import API from '../../Services/API';
 import moment from 'moment';
 import "../Style/CustomFont.css"
 import LoadBlog from '../Animation/LoadBlog';
+import { useSelector } from 'react-redux';
 
 const WriterProfile = () => {
 
@@ -34,9 +35,12 @@ const WriterProfile = () => {
                               setLoad(true)
                          }, 4000)
                     }
+                    else {
+                         setBlogs([]);
+                    }
                } catch (err) {
+                    setBlogs([]);
                     toast.error("Failed to Load Blogs");
-                    // console.log(err);
                }
           };
 
@@ -63,6 +67,9 @@ const WriterProfile = () => {
           }
      }, [authorId]);
 
+     const userId = useSelector((state) => (state.LoginSlice.loggedUserId))
+     // console.log(userId)
+
      return (
           <div className='flex flex-col-reverse lg:flex-row w-screen lg:px-40 mt-5'>
                <ToastContainer />
@@ -87,31 +94,34 @@ const WriterProfile = () => {
                                                   <p className="hidden sm:block fontTitle text-sm font-medium">{moment(items?.createdAt).format('MMMM Do YYYY')}</p>
                                              </div>
                                         </div>
-                                        <div className='flex items-center'>
-                                             <Link to='/edit' className={`px-4 border-opacity-0 hover:border-opacity-100 duration-200 cursor-pointer ${showDelete !== null && showDelete === key ? 'hidden' : 'flex'}`}>
-                                                  <div className='flex place-content-center items-center font-thin space-x-4 sm:text-lg'>
-                                                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="size-[22px]">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                       </svg>
-                                                  </div>
-                                             </Link>
-                                             <div className="flex place-content-center items-center relative px-4 border-opacity-0 hover:border-opacity-100 duration-200 cursor-pointer">
-                                                  <div className={`shadow-[1px_1px_1px_black] mr-4 text-center flex place-content-center border-r-2 ${showDelete === key ? 'flex' : 'hidden'}`}>
-                                                       <h3 className="font text-lg py-1 px-2 font-bold text-gray-700 pr-3">Are You sure ?</h3>
-                                                       <svg onClick={() => handleDeleteButton(null)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="white" className="size-6 my-auto bg-red-600 mr-4 rounded-sm">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                                       </svg>
-                                                       <svg onClick={() => handleRemove(key)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="white" className="size-6 my-auto bg-green-600 mr-2 rounded-sm">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                                       </svg>
-                                                  </div>
-                                                  <div onClick={() => handleDeleteButton(key)} name="showDelete" className='flex place-content-center items-center font-thin space-x-4 sm:text-lg'>
-                                                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="size-5">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                       </svg>
+                                        {userId === authorId && (
+                                             <div className='flex items-center'>
+                                                  <Link to='/edit' className={`px-4 border-opacity-0 hover:border-opacity-100 duration-200 cursor-pointer ${showDelete !== null && showDelete === key ? 'hidden' : 'flex'}`}>
+                                                       <div className='flex place-content-center items-center font-thin space-x-4 sm:text-lg'>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="size-[22px]">
+                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                            </svg>
+                                                       </div>
+                                                  </Link>
+                                                  <div className="flex place-content-center items-center relative px-4 border-opacity-0 hover:border-opacity-100 duration-200 cursor-pointer">
+                                                       <div className={`shadow-[1px_1px_1px_black] mr-4 text-center flex place-content-center border-r-2 ${showDelete === key ? 'flex' : 'hidden'}`}>
+                                                            <h3 className="font text-lg py-1 px-2 font-bold text-gray-700 pr-3">Are You sure ?</h3>
+                                                            <svg onClick={() => handleDeleteButton(null)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="white" className="size-6 my-auto bg-red-600 mr-4 rounded-sm">
+                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                                            </svg>
+                                                            <svg onClick={() => handleRemove(key)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="white" className="size-6 my-auto bg-green-600 mr-2 rounded-sm">
+                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                                            </svg>
+                                                       </div>
+                                                       <div onClick={() => handleDeleteButton(key)} name="showDelete" className='flex place-content-center items-center font-thin space-x-4 sm:text-lg'>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="size-5">
+                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                            </svg>
+                                                       </div>
                                                   </div>
                                              </div>
-                                        </div>
+                                        )
+                                        }
                                    </div>
                                    <Link to={`/blogContent/${items?._id}`} className="mt-2 bg-white rounded px-4 leading-normal w-full flex">
                                         <img
