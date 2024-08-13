@@ -1,5 +1,5 @@
 import React from 'react'
-import LandingPagePhoto from "../Assets/LandingPage.webp"
+import LandingPagePhoto from "../../Assets/LandingPage.webp"
 
 const Login = () => {
      return (

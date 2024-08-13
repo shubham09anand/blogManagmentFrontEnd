@@ -5,8 +5,8 @@ import LandingPage from './LandingPage'
 import Header from './Header'
 // import Error_404 from './Error_404'
 import BlogList from './Blog/BlogList'
-import Login from '../Auth/Login';
-import Signup from '../Auth/Signup';
+import Login from './Auth/Login';
+import Signup from './Auth/Signup';
 import WriterProfile from './Profile/WriterProfile';
 import ProfileSetting from './Profile/ProfileSetting';
 import BlogContent from './Blog/BlogContent';

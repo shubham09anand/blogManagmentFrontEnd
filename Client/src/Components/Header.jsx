@@ -9,10 +9,10 @@ const Header = () => {
 
                <nav className="nav font-bold text-black text-sm">
                     <ul className="flex items-center">
-                         <li className="hidden p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer active">
+                         <li className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer active">
                               <Link to='/signup'>Get Started</Link>
                          </li>
-                         <li className="hidden p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer">
+                         <li className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer">
                               <Link to='/login'>Sign in</Link>
                          </li>
                          <li className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer active">
