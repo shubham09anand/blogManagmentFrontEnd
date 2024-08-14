@@ -10,6 +10,7 @@ const MakeComment = () => {
      const [comment, setComment] = useState("");
      const userId = useSelector((state) => state.LoginSlice.loggedUserId)
      const { blogId } = useParams()
+     console.log(blogId)
 
      const getCurrentTime = () => {
           const now = new Date();
