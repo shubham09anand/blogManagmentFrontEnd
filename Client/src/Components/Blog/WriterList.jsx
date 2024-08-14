@@ -34,7 +34,7 @@ const WriterList = () => {
           <ul className="flex flex-col w-full mt-10 border-t-2 border-gray-200">
                <ToastContainer />
                <div className='text-2xl tracking-wider font-bold pl-5 pt-5'>Writers</div>
-               {load && writers.map((items, index) => (
+               {load && writers?.map((items, index) => (
                     <li key={index} className="flex flex-row">
                          <div className="select-none cursor-pointer hover:bg-gray-50 flex flex-1 items-center p-4">
                               <div className="flex flex-col w-10 h-10 justify-center items-center mr-4">

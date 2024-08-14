@@ -41,7 +41,7 @@ const Search = ({ text }) => {
                          setLoadBlog(true);
                     }
                } catch (err) {
-                    toast.error("Error fetching tags");
+                    // toast.error("Error fetching tags");
                     console.log(err);
                }
           };
@@ -147,7 +147,7 @@ const Search = ({ text }) => {
                     <div onClick={handleFilterToAll} className="relative px-5 mt-3 bg-gray-200 rounded-full cursor-pointer select-none font-semibold tracking-wide shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 text-gray-900">
                          <span className="text-sm ">All</span>
                     </div>
-                    {LaodWriter && selectedOption === 'tags' && displayTags.map((item, index) => (
+                    {LaodWriter && selectedOption === 'tags' && displayTags?.map((item, index) => (
                          <div onClick={() => setSelectedTag(item)} key={index} className="mt-3 relative px-5 py-2 m-2 bg-gray-200 rounded-full cursor-pointer select-none font-semibold tracking-wide shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 text-gray-900">
                               <span className="text-sm">{item}</span>
                          </div>
@@ -155,7 +155,7 @@ const Search = ({ text }) => {
                     {!LaodTag && selectedOption === 'tags' && (<div className='mt-9'><LaodTags key={Math.random()} /></div>)}
 
                    
-                    {LaodTag && selectedOption === 'writers' && displayWriters.map((item, key) => (
+                    {LaodTag && selectedOption === 'writers' && displayWriters?.map((item, key) => (
                          <div onClick={() => setSelectedWriter(item?.firstName)} key={key} className="flex place-content-center items-center space-x-3 relative px-5 py-2 m-2 bg-gray-200 rounded-full cursor-pointer select-none font-semibold tracking-wide shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 text-gray-900">
                               <img src={item?.photo?.trim() !== "" ? item?.photo : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} alt="authorImage" className='border-2 border-black w-8 h-8 rounded-full bg-cover' />
                               <span className="text-sm capitalize">{`${item?.firstName} ${item?.lastName}`}</span>
@@ -165,7 +165,7 @@ const Search = ({ text }) => {
                </div>
 
                <div className='gap-10 flex flex-wrap items-center place-content-center'>
-                    {loadBlog && filteredBlogs.map((items, index) => (
+                    {loadBlog && filteredBlogs?.map((items, index) => (
                          <Link to={`/blogContent/${items._id}`} key={index} className="w-11/12 lg:w-1/5">
                               <div className="shadow-md border border-gray-200 rounded-lg max-w-sm">
                                    <img className="rounded-t-lg h-48 w-full" src={items?.blogPhoto} alt="imageError" />
@@ -183,7 +183,7 @@ const Search = ({ text }) => {
                               </div>
                          </Link>
                     ))}
-                    {loadBlog && filteredBlogs.length === 0 && <div className='text-gray-600 font-thin fontTitle'>No Blogs Match</div>}
+                    {loadBlog && filteredBlogs?.length === 0 && <div className='text-gray-600 font-thin fontTitle'>No Blogs Match</div>}
                     {!loadBlog && Array.from({ length: 4 }).map((_, index) => (
                          <LoadFilterBlog key={index} />
                     ))}

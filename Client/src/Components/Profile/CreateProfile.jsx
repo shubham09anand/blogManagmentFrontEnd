@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import API from '../../Services/API'; // Ensure API is correctly imported
 
 const CreateProfile = () => {
+     const { authorId } = useParams();
+     const noProfileImage = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
 
-     const noProfileImage = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
      const [firstName, setFirstName] = useState('');
      const [lastName, setLastName] = useState('');
      const [email, setEmail] = useState('');
@@ -11,7 +15,6 @@ const CreateProfile = () => {
      const [tags, setTags] = useState(['']);
      const [aboutYou, setAboutYou] = useState('');
      const [image, setImage] = useState(null);
-
 
      const handleTagChange = (index, value) => {
           const newTags = [...tags];
@@ -32,20 +35,38 @@ const CreateProfile = () => {
           }
      };
 
-     const handleSubmit = (e) => {
+     const handleSubmit = async (e) => {
           e.preventDefault();
-          // Handle form submission here
+
+          // Ensure that authorId is available
+          if (!authorId) {
+               toast.error("Author ID is missing");
+               return;
+          }
+
+          // Create the formData object with the expected structure
           const formData = {
-               firstName,
-               lastName,
-               email,
-               phone,
-               pronouns,
-               tags,
-               aboutYou
+               userId: authorId, // Include the ID here as _id
+               email: email,
+               phone: phone,
+               pronouns: pronouns,
+               interestedTopics: tags.join(', '), // Convert tags array to a comma-separated string
+               aboutYou: aboutYou,
           };
-          console.log('Form Data:', formData);
+
+          try {
+               const response = await API.post('/updateProfile', formData);
+               if (response.data.response.success) {
+                    toast.success("Profile updated successfully!");
+               } else {
+                    toast.error("Failed to update profile");
+               }
+          } catch (error) {
+               toast.error("Error submitting profile");
+          }
      };
+
+
 
      const handleImageChange = (e) => {
           const file = e.target.files[0];
@@ -54,13 +75,44 @@ const CreateProfile = () => {
           }
      };
 
+     useEffect(() => {
+          const getUserProfile = async () => {
+               try {
+                    const response = await API.get(`/getWriterProfile/${authorId}`);
+                    if (response.data.response.success) {
+                         const userProfile = response.data.response.response[0];
+                         setFirstName(userProfile.firstName);
+                         setLastName(userProfile.lastName);
+                         setEmail(userProfile.email);
+                         setPhone(userProfile.phone);
+                         setPronouns(userProfile.pronouns);
+                         setAboutYou(userProfile.aboutYou);
+                         setImage(userProfile.photo);
+
+                         // Split interestedTopics into an array of tags
+                         const tagsArray = userProfile.interestedTopics.split(',').map(tag => tag.trim());
+                         setTags(tagsArray);
+                    }
+               } catch (err) {
+                    toast.error("Failed to Load Profile");
+                    // console.log(err);
+               }
+          };
+
+          if (authorId) {
+               getUserProfile();
+          }
+     }, [authorId]);
+
+
      return (
           <div className="bg-white w-full md:pl-10 lg:pl-16 rounded-lg mt-5">
+               <ToastContainer />
                <h1 className="text-2xl font-bold text-gray-800 mb-4">Profile</h1>
                <form onSubmit={handleSubmit}>
                     <div className="mb-5 relative border-4 border-white rounded-full sm:flex">
                          <div className='w-fit h-fit rounded-full bg-gray-300 border border-black'>
-                              <img className="object-scale-down w-32 h-32 rounded-full" src={image == null ? noProfileImage : image} alt='ProfileImage' />
+                              <img className="object-scale-down w-32 h-32 rounded-full" src={image} alt='ProfileImage' />
                          </div>
                          <div className='sm:pl-5 my-auto'>
                               <label className="block mb-2" htmlFor="file_input">Upload file</label>
@@ -122,7 +174,7 @@ const CreateProfile = () => {
                          </div>
                     </div>
                     <div className="mt-8 flex justify-end">
-                         <button type="submit" className="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:bg-teal-600 dark:hover:bg-teal-900">
+                         <button onClick={handleSubmit} type="submit" className="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:bg-teal-600 dark:hover:bg-teal-900">
                               Place Order
                          </button>
                     </div>

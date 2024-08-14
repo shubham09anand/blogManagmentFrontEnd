@@ -17,6 +17,7 @@ const Comment = () => {
                 const response = await API.get(`/getComments/${blogId}`);
                 if (response.data.response.success) {
                     setComments(response.data.response.response);
+                    console.log(response.data.response.response)
                 } 
             } catch (err) {
                 toast.error("Failed to Load Comments");
@@ -42,7 +43,7 @@ const Comment = () => {
                             <Link to="/profile" className="flex items-center">
                                 <p className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900">
                                     <img className="mr-2 w-6 h-6 rounded-full border-2 border-black" src={item?.photo?.trim() !== "" ? item?.photo : noProfilePhoto} alt="Profile" />
-                                    Jese Leos
+                                    <span>{item?.firstName} {item?.lastName}</span>
                                 </p>
                                 <p className="text-gray-600">
                                     <time className="text-xs"  dateTime="commentTime" title="commentTime">

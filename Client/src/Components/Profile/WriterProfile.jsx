@@ -10,20 +10,13 @@ import { useSelector } from 'react-redux';
 const WriterProfile = () => {
 
      const noProfilePhoto = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+     const userId = useSelector((state) => (state.LoginSlice.loggedUserId))
      const { authorId } = useParams();
      const [showDelete, setShowDelete] = useState(null);
      const [userProfile, setUserProfile] = useState(null);
      const [blogs, setBlogs] = useState([]);
      const [load, setLoad] = useState(false)
-
-     const handleRemove = (index) => {
-          setBlogs(blogs.filter((_, i) => i !== index));
-          setShowDelete(null)
-     };
-
-     const handleDeleteButton = (index) => {
-          setShowDelete(index)
-     }
+     const [isBlog, setIsBlog] = useState(false)
 
      useEffect(() => {
           const getAllBlogsByAuthor = async () => {
@@ -35,11 +28,13 @@ const WriterProfile = () => {
                               setLoad(true)
                          }, 4000)
                     }
-                    else {
-                         setBlogs([]);
+                    else if (response.data.response.success === false){
+                         setIsBlog(true)
+                         setTimeout(() => {
+                              setLoad(true)
+                         }, 2000)
                     }
                } catch (err) {
-                    setBlogs([]);
                     toast.error("Failed to Load Blogs");
                }
           };
@@ -50,7 +45,7 @@ const WriterProfile = () => {
      }, [authorId]);
 
      useEffect(() => {
-          const getAllBlogsByAuthor = async () => {
+          const getWriterProfile = async () => {
                try {
                     const response = await API.get(`/getWriterProfile/${authorId}`);
                     if (response.data.response.success) {
@@ -63,12 +58,23 @@ const WriterProfile = () => {
           };
 
           if (authorId) {
-               getAllBlogsByAuthor();
+               getWriterProfile();
           }
      }, [authorId]);
 
-     const userId = useSelector((state) => (state.LoginSlice.loggedUserId))
-     // console.log(userId)
+     const deleteBlog = async (blogId, index) => {
+          try {
+               const response = await API.post(`/deleteBlog`, { "_id": blogId, "authorId": authorId });
+               if (response.data.response.success) {
+                    setBlogs(blogs.filter((_, i) => i !== index));
+                    setShowDelete(null);
+               }
+               console.log(response.data.response.success)
+               console.log(response.data.response.response)
+          } catch (err) {
+               toast.error("Failed to Load Profile");
+          }
+     };
 
      return (
           <div className='flex flex-col-reverse lg:flex-row w-screen lg:px-40 mt-5'>
@@ -84,7 +90,7 @@ const WriterProfile = () => {
                                    </div>
                                    <div className="flex justify-between mb-2 pl-4">
                                         <div className='flex py-5 place-content-center items-center'>
-                                             <img src={items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} onError={(e)=> e.target.src = noProfilePhoto} className="h-8 w-8 rounded-full mr-2 object-cover border-2 border-black" alt="Author" />
+                                             <img src={items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} className="h-8 w-8 rounded-full mr-2 object-cover border-2 border-black" alt="Author" />
                                              <div className={`space-x-4 sm:hidden ${showDelete !== null && showDelete === key ? 'hidden' : 'flex'}`}>
                                                   <p className="fontTitle font-semibold text-sm capitalize">{items.firstName} {items.lastName}</p>
                                                   <p className="fontTitle text-sm font-medium">{moment(items?.createdAt).format('MMMM Do YYYY')}</p>
@@ -109,7 +115,7 @@ const WriterProfile = () => {
                                                             <svg onClick={() => handleDeleteButton(null)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="white" className="size-6 my-auto bg-red-600 mr-4 rounded-sm">
                                                                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                                                             </svg>
-                                                            <svg onClick={() => handleRemove(key)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="white" className="size-6 my-auto bg-green-600 mr-2 rounded-sm">
+                                                            <svg onClick={() => deleteBlog(items?._id, key)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="white" className="size-6 my-auto bg-green-600 mr-2 rounded-sm">
                                                                  <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                                                             </svg>
                                                        </div>
@@ -133,8 +139,7 @@ const WriterProfile = () => {
                                              <div className="md:mt-0 font-bold md:text-lg lg:text-2xl line-clamp-1 md:line-clamp-2" style={{ fontFamily: "sohne, Helvetica Neue, Helvetica, Arial, sans-serif" }}>
                                                   {items?.title}
                                              </div>
-                                             <p className="text-base line-clamp-2 md:line-clamp-4 lg:line-clamp-3 text-gray-800">
-                                                  {items?.content}
+                                             <p className="text-base line-clamp-2 md:line-clamp-4 lg:line-clamp-3 text-gray-800" dangerouslySetInnerHTML={{ __html: items?.content }}>
                                              </p>
                                         </div>
                                    </Link>
@@ -144,7 +149,7 @@ const WriterProfile = () => {
                     {!load && Array.from({ length: 4 }).map((_, index) => (
                          <LoadBlog show={true} key={index} />
                     ))}
-                    {blogs?.length === 0 &&
+                    {(authorId === userId && isBlog) &&
                          <Link to='/write' className='mx-auto w-fit'>
                               <div className='cursor-pointer select-none hover:opacity-75 rounded-full  mt-20 mb-5 px-10 py-4 bg-gray-950 text-white flex place-content-center items-center w-fit space-x-5 mx-auto'>
                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-8">
@@ -163,8 +168,8 @@ const WriterProfile = () => {
                     <div className="bg-white p-3">
                          <div className='flex gap-x-5 place-content-center items-center mb-5'>
                               <div className="image overflow-hidden">
-                                   <img className="hidden lg:block flex-shrink-0 object-cover rounded-full h-36 lg:h-52 bg-gray-500 aspect-square border-2 border-black" src={userProfile?.photo?.trim() !== "" ? userProfile?.photo : noProfilePhoto} onError={(e)=> e.target.src = noProfilePhoto} alt="imageError" />
-                                   <img className="block lg:hidden flex-shrink-0 object-cover rounded-full h-36 bg-gray-500 aspect-square" src={userProfile?.photo?.trim() !== "" ? userProfile?.photo : noProfilePhoto} onError={(e)=> e.target.src = noProfilePhoto} alt="imageError" />
+                                   <img className="hidden lg:block flex-shrink-0 object-cover rounded-full h-36 lg:h-52 bg-gray-500 aspect-square border-2 border-black" src={userProfile?.photo?.trim() !== "" ? userProfile?.photo : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} alt="imageError" />
+                                   <img className="block lg:hidden flex-shrink-0 object-cover rounded-full h-36 bg-gray-500 aspect-square" src={userProfile?.photo?.trim() !== "" ? userProfile?.photo : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} alt="imageError" />
                               </div>
                               <div>
                                    <h1 className="text-gray-900 font-bold text-3xl leading-8 my-1 capitalize">{userProfile?.firstName} {userProfile?.lastName}</h1>
