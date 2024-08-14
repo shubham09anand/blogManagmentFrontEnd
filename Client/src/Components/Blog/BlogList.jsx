@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import SideBar from './SideBar';
 import Search from '../Search/Search';
-import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
 import API from '../../Services/API';
 import LoadBlog from '../Animation/LoadBlog';
+import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 const BlogList = () => {
      const noProfilePhoto = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
@@ -74,24 +74,19 @@ const BlogList = () => {
                                    <div className='border-gray-200 w-full flex pb-5 00 border-b-2 border-opacity-35'>
                                         <div>
                                              <div className="flex items-center mb-2 pl-4 py-4">
-                                                  <img src={items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} className="h-8 w-8 rounded-full mr-2 object-cover border-2 border-black" alt="AuthorImage" />
+                                                  <img src={items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} onError={(e)=> e.target.src = noProfilePhoto} className="h-8 w-8 rounded-full mr-2 object-cover border-2 border-black" alt="AuthorImage" />
                                                   <Link to={`/profile/${items?.authorId}`} className='flex place-content-center items-center space-x-6'>
                                                        <p className="fontTitle font-semibold text-sm capitalize">{items?.firstName} {items?.lastName}</p>
                                                        <p className="fontTitle text-sm font-medium">{moment(items?.createdAt).format('MMMM Do YYYY')}</p>
                                                   </Link>
                                              </div>
                                              <Link to={`/blogContent/${items?._id}`} className=" rounded px-4 leading-normal w-full flex">
-                                                  <img
-                                                       className="shadow-[1px_1px_5px_gray] md:rounded-md mr-5 h-16 w-24 md:h-40 md:w-60 flex-none bg-cover overflow-hidden"
-                                                       src={items?.blogPhoto}
-                                                       alt="imageError"
-                                                  />
+                                                  <img className="shadow-[1px_1px_5px_gray] md:rounded-md mr-5 h-16 w-24 md:h-40 md:w-60 flex-none bg-cover overflow-hidden" src={items?.blogPhoto} alt="imageError"/>
                                                   <div>
                                                        <div className="md:mt-0 font-bold md:text-lg lg:text-2xl line-clamp-1 md:line-clamp-2" style={{ fontFamily: "sohne, Helvetica Neue, Helvetica, Arial, sans-serif" }}>
                                                             {items?.title}
                                                        </div>
-                                                       <p className="text-base line-clamp-2 md:line-clamp-4 lg:line-clamp-3 text-gray-800">
-                                                            {items?.content}
+                                                       <p className="text-base line-clamp-2 md:line-clamp-4 lg:line-clamp-3 text-gray-800" dangerouslySetInnerHTML={{ __html: items?.content }}>                                                            
                                                        </p>
                                                   </div>
                                              </Link>

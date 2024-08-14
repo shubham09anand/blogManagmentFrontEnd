@@ -72,7 +72,7 @@ const Header = () => {
                                    </li>
                                    <li className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer">
                                         <Link to={`/profile/${userId}`}>
-                                             <img className="w-10 h-10 rounded-full opacity-100" src={userPhoto} alt="Rounded avatar" />
+                                             <img className="w-10 h-10 rounded-full opacity-100" src={userPhoto} onError={(e)=> e.target.src = noProfilePhoto} alt="Rounded avatar" />
                                         </Link>
                                    </li>
                               </>

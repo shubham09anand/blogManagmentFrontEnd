@@ -74,7 +74,7 @@ const WriterProfile = () => {
           <div className='flex flex-col-reverse lg:flex-row w-screen lg:px-40 mt-5'>
                <ToastContainer />
                <div className='h-screen w-full lg:w-2/3 p-2'>
-                    {load && blogs.map((items, key) => (
+                    {load && blogs?.map((items, key) => (
                          <div key={key} className='border-gray-200 w-full flex mb-5 pb-4 00 border-b-2'>
                               <div>
                                    <div className="flex justify-start gap-2 flex-wrap pl-4">
@@ -84,7 +84,7 @@ const WriterProfile = () => {
                                    </div>
                                    <div className="flex justify-between mb-2 pl-4">
                                         <div className='flex py-5 place-content-center items-center'>
-                                             <img src={items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} className="h-8 w-8 rounded-full mr-2 object-cover border-2 border-black" alt="Author" />
+                                             <img src={items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} onError={(e)=> e.target.src = noProfilePhoto} className="h-8 w-8 rounded-full mr-2 object-cover border-2 border-black" alt="Author" />
                                              <div className={`space-x-4 sm:hidden ${showDelete !== null && showDelete === key ? 'hidden' : 'flex'}`}>
                                                   <p className="fontTitle font-semibold text-sm capitalize">{items.firstName} {items.lastName}</p>
                                                   <p className="fontTitle text-sm font-medium">{moment(items?.createdAt).format('MMMM Do YYYY')}</p>
@@ -144,7 +144,7 @@ const WriterProfile = () => {
                     {!load && Array.from({ length: 4 }).map((_, index) => (
                          <LoadBlog show={true} key={index} />
                     ))}
-                    {blogs.length === 0 &&
+                    {blogs?.length === 0 &&
                          <Link to='/write' className='mx-auto w-fit'>
                               <div className='cursor-pointer select-none hover:opacity-75 rounded-full  mt-20 mb-5 px-10 py-4 bg-gray-950 text-white flex place-content-center items-center w-fit space-x-5 mx-auto'>
                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-8">
@@ -163,8 +163,8 @@ const WriterProfile = () => {
                     <div className="bg-white p-3">
                          <div className='flex gap-x-5 place-content-center items-center mb-5'>
                               <div className="image overflow-hidden">
-                                   <img className="hidden lg:block flex-shrink-0 object-cover rounded-full h-36 lg:h-52 bg-gray-500 aspect-square border-2 border-black" src={userProfile?.photo?.trim() !== "" ? userProfile?.photo : noProfilePhoto} alt="imageError" />
-                                   <img className="block lg:hidden flex-shrink-0 object-cover rounded-full h-36 bg-gray-500 aspect-square" src={userProfile?.photo?.trim() !== "" ? userProfile?.photo : noProfilePhoto} alt="imageError" />
+                                   <img className="hidden lg:block flex-shrink-0 object-cover rounded-full h-36 lg:h-52 bg-gray-500 aspect-square border-2 border-black" src={userProfile?.photo?.trim() !== "" ? userProfile?.photo : noProfilePhoto} onError={(e)=> e.target.src = noProfilePhoto} alt="imageError" />
+                                   <img className="block lg:hidden flex-shrink-0 object-cover rounded-full h-36 bg-gray-500 aspect-square" src={userProfile?.photo?.trim() !== "" ? userProfile?.photo : noProfilePhoto} onError={(e)=> e.target.src = noProfilePhoto} alt="imageError" />
                               </div>
                               <div>
                                    <h1 className="text-gray-900 font-bold text-3xl leading-8 my-1 capitalize">{userProfile?.firstName} {userProfile?.lastName}</h1>

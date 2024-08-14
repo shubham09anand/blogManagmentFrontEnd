@@ -12,6 +12,7 @@ import ProfileSetting from './Profile/ProfileSetting';
 import BlogContent from './Blog/BlogContent';
 import BlogEditor from './Blog/BlogEditor';
 import EditBlog from './Blog/EditBlog';
+import ProtectedRoute from './Auth/ProtectedRoute';
 
 const useDocumentTitle = (title) => {
   useEffect(() => {
@@ -61,6 +62,7 @@ const Layout = () => {
         pathname.startsWith('/profile/')
       ) && <Header />}
 
+      <ProtectedRoute/>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />

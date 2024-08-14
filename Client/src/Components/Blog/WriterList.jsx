@@ -39,7 +39,7 @@ const WriterList = () => {
                          <div className="select-none cursor-pointer hover:bg-gray-50 flex flex-1 items-center p-4">
                               <div className="flex flex-col w-10 h-10 justify-center items-center mr-4">
                                    <div className="block relative">
-                                        <img alt="profile" src={items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} className="mx-auto object-cover border-2 border-black rounded-full h-10 w-10" />
+                                        <img alt="profile" src={items?.photo[0]?.trim() !== "" ? items?.photo : noProfilePhoto} onError={(e)=> e.target.src = noProfilePhoto} className="mx-auto object-cover border-2 border-black rounded-full h-10 w-10" />
                                    </div>
                               </div>
                               <div className="flex-1 pl-1 mr-16">
