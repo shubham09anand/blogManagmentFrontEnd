@@ -39,20 +39,23 @@ const Login = () => {
           setButton(true);
           try {
                const response = await API.post("/login", {
-                    userName,
-                    password,
-               });
-               // console.log(response.data.response.success)
+                    "userName":userName,
+                    "password":password
+                });
                if (response.data.response.success && response.data.response.status === 200) {
                     localStorage.setItem('user_Id_BlogMangement', response.data.response.response.id);
                     localStorage.setItem('user_Token_BlogMangement', response.data.response.response.token);
                     dispatch(setLoginData({ token: response.data.response.response.token, userId: response.data.response.response.id }));
-                    setLogin(true)
+                    setLogin(false)
                     navigate("/blogs")
+               }
+               else if(response.data.response.success === false){
+                    setLogin(true)
                }
           } catch (err) {
                console.error(err);
                setButton(false)
+               setLogin(true)
           } finally {
                if (!logIn) {
                     setButton(false);

@@ -69,7 +69,7 @@ const Search = ({ text }) => {
                     if (response.data.response.success) {
                          setBlogData(response.data.response.response);
                          setTimeout(() => {
-                              setLoadTag(true)
+                              setLoadBlog(true)
                          }, 4000)
                     }
                } catch (err) {
@@ -193,35 +193,3 @@ const Search = ({ text }) => {
 };
 
 export default Search;
-
-
-
-// useEffect(() => {
-//      const shuffleArray = (array) => {
-//           let currentIndex = array.length, temporaryValue, randomIndex;
-//           while (currentIndex !== 0) {
-//                randomIndex = Math.floor(Math.random() * currentIndex);
-//                currentIndex -= 1;
-//                temporaryValue = array[currentIndex];
-//                array[currentIndex] = array[randomIndex];
-//                array[randomIndex] = temporaryValue;
-//           }
-//           return array;
-//      };
-
-//      // Get 10 random tags
-//      const getRandomTags = () => {
-//           const shuffledTags = shuffleArray([...displayTags]);
-//           return shuffledTags.slice(0, 10);
-//      };
-
-//      // get 5 random writers
-//      const getRandomWriters = () => {
-//           const shuffledWriters = shuffleArray([...displayWriters]);
-//           return shuffledWriters.slice(0, 5);
-//      };
-
-//      setDisplayTags(getRandomTags());
-//      setDisplayWriters(getRandomWriters());
-//      // eslint-disable-next-line
-// }, []);

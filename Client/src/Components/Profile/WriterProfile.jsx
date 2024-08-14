@@ -6,6 +6,7 @@ import moment from 'moment';
 import "../Style/CustomFont.css"
 import LoadBlog from '../Animation/LoadBlog';
 import { useSelector } from 'react-redux';
+import boBlogs from "../../Assets/No Blogs.jpg"
 
 const WriterProfile = () => {
 
@@ -161,6 +162,14 @@ const WriterProfile = () => {
                                    You Haven't Wrote Anything !!!
                               </div>
                          </Link>
+                    }
+                    {(authorId !== userId && isBlog) &&
+                         <div className='mx-auto w-fit mt-10'>
+                              <img src={boBlogs} alt="" className='ml-8' />
+                              <div className='text-slate-700 text-lg tracking-wider font w-fit mx-auto'>
+                                   No Blogs Yet From This Writer !!!
+                              </div>
+                         </div>
                     }
                </div>
 
