@@ -13,6 +13,7 @@ const BlogContent = () => {
      const { blogId } = useParams();
      const [blog, setBlog] = useState([])
 
+     console.log(blogId)
      useEffect(() => {
           const getBlog = async () => {
                try {
