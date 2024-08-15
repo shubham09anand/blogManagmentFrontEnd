@@ -10,6 +10,7 @@ const BlogEditor = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [tags, setTags] = useState(['']);
+    const [blogPhoto, setBlogPhot] = useState([]);
 
     const config = useMemo(() => ({
         readonly: false,
@@ -72,26 +73,50 @@ const BlogEditor = () => {
         return true;
     };
 
-    const makeBlog = async () => {
+    const getPhotoFromContnet = async (htmlContent) => {
+        const imgSrcRegex = /src="([^"]*)"/g;
+        let imgSrc;
+        const imgSrcArray = [];
 
+        // Extract all image src values
+        while ((imgSrc = imgSrcRegex.exec(htmlContent)) !== null) {
+            console.log(imgSrc)
+            imgSrcArray.push(imgSrc[1]);
+        }
+        console.log(imgSrcArray)
+
+        setBlogPhot(imgSrcArray)
+        return imgSrcArray
+
+    }
+
+    const makeBlog = async () => {
         if (!userId || !validateInputs()) {
             return;
         }
         const createdAt = getCurrentTime();
-
+    
+        const blogAllphoto = await getPhotoFromContnet(content);
+    
+        const requestData = {
+            authorId: userId,
+            title,
+            blogPhoto: blogAllphoto,
+            tags,
+            content,
+            createdAt,
+        };
+    
+        console.log("Request Data:", requestData);
+    
         try {
-            const response = await API.post('/createBlog', {
-                authorId: userId,
-                title,
-                tags,
-                content,
-                createdAt,
-            });
+            const response = await API.post('/createBlog', requestData);
             console.log(response);
         } catch (error) {
             console.log("Error ", error);
         }
     };
+    
 
     return (
         <div className='w-screen bg-[#f7f4ed]'>
