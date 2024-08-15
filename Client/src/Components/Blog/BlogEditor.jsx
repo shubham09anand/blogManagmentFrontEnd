@@ -10,7 +10,6 @@ const BlogEditor = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [tags, setTags] = useState(['']);
-    const [blogPhoto, setBlogPhot] = useState([]);
 
     const config = useMemo(() => ({
         readonly: false,
@@ -83,11 +82,7 @@ const BlogEditor = () => {
             console.log(imgSrc)
             imgSrcArray.push(imgSrc[1]);
         }
-        console.log(imgSrcArray)
-
-        setBlogPhot(imgSrcArray)
         return imgSrcArray
-
     }
 
     const makeBlog = async () => {
@@ -106,17 +101,14 @@ const BlogEditor = () => {
             content,
             createdAt,
         };
-    
-        console.log("Request Data:", requestData);
-    
+        
         try {
             const response = await API.post('/createBlog', requestData);
-            console.log(response);
+            toast.success("Blog Has Been Posted")
         } catch (error) {
             console.log("Error ", error);
         }
     };
-    
 
     return (
         <div className='w-screen bg-[#f7f4ed]'>
@@ -130,15 +122,7 @@ const BlogEditor = () => {
                         </div>
                     </div>
 
-                    <input
-                        onChange={(e) => setTitle(e.target.value)}
-                        value={title}
-                        type="text"
-                        name="name"
-                        id="name"
-                        placeholder="Title"
-                        className="w-full fontTitle bg-[#f7f4ed] py-2 px-6 pl-3 mt-20 text-4xl font-medium outline-none focus:border-[#16831f] focus:shadow-md placeholder:tracking-wider"
-                    />
+                    <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="name" id="name" placeholder="Title" className="w-full fontTitle bg-[#f7f4ed] py-2 px-6 pl-3 mt-20 text-4xl font-medium outline-none focus:border-[#16831f] focus:shadow-md placeholder:tracking-wider"/>
 
                     <div className='mt-2'>
                         <div className='flex space-x-5'>
@@ -159,24 +143,14 @@ const BlogEditor = () => {
                                             <path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                         </svg>
                                     )}
-                                    <input
-                                        type="text"
-                                        name={`tag-${index}`}
-                                        id={`tag-${index}`}
-                                        value={tag}
-                                        onChange={(e) => handleTagChange(index, e.target.value)}
-                                        placeholder="Tag"
-                                        className="shadow fontTitle m-1 mx-3 w-36 border-b border-r border-slate-200 bg-[#f7f4ed] py-1 px-6 pl-3 font-medium outline-none focus:border-[#16831f] focus:shadow-md my-2"
-                                    />
+                                    <input type="text" name={`tag-${index}`} id={`tag-${index}`} value={tag} onChange={(e) => handleTagChange(index, e.target.value)} placeholder="Tag" className="shadow fontTitle m-1 mx-3 w-36 border-b border-r border-slate-200 bg-[#f7f4ed] py-1 px-6 pl-3 font-medium outline-none focus:border-[#16831f] focus:shadow-md my-2"/>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
 
-                <div className="mb-2 font-semibold block text-lg">
-                    Content
-                </div>
+                <div className="mb-2 font-semibold block text-lg">Content</div>
                 <JoditEditor
                     config={config}
                     ref={editor}
@@ -189,3 +163,5 @@ const BlogEditor = () => {
 }
 
 export default BlogEditor;
+
+

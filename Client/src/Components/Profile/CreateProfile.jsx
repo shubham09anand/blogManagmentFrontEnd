@@ -59,8 +59,6 @@ const CreateProfile = () => {
           }
           return true;
       };
-      
-
 
       const handleSubmit = async (e) => {
           e.preventDefault();
@@ -100,7 +98,6 @@ const CreateProfile = () => {
           }
       };
       
-
      const handleImageChange = (e) => {
           const file = e.target.files[0];
           if (file) {

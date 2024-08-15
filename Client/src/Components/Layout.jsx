@@ -57,7 +57,7 @@ const Layout = () => {
         pathname === "/blogs" ||
         pathname.startsWith("/setting") ||
         pathname === "/write" ||
-        pathname === "/edit" ||
+        pathname.startsWith("/edit") ||
         pathname.startsWith('/blogContent/') ||
         pathname.startsWith('/profile/')
       ) && <Header />}
@@ -72,7 +72,7 @@ const Layout = () => {
         <Route path="/setting/:authorId" element={<ProfileSetting />} />
         <Route path="/blogContent/:blogId" element={<BlogContent />} />
         <Route path="/write" element={<BlogEditor />} />
-        <Route path="/edit" element={<EditBlog />} />
+        <Route path="/edit/:blogId" element={<EditBlog />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </>
