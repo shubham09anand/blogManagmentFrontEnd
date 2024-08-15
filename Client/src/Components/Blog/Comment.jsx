@@ -37,10 +37,10 @@ const Comment = () => {
             {comments.length === 0 ? (
                 <p className='font-thin fontTitle text-center w-fit mx-auto text-sm text-gray-400'>No comments available.</p>
             ) : (
-                comments.map((item) => (
-                    <div key={item._id} className="w-full p-6 text-base bg-white border-b">
+                comments.map((item,key) => (
+                    <div key={key} className="w-full p-6 text-base bg-white border-b">
                         <div className="flex justify-between items-center mb-2">
-                            <Link to="/profile" className="flex items-center">
+                            <Link to={`/profile/${item._id}`} className="flex items-center">
                                 <p className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900">
                                     <img className="mr-2 w-6 h-6 rounded-full border-2 border-black" src={item?.photo?.trim() !== "" ? item?.photo : noProfilePhoto} alt="Profile" />
                                     <span>{item?.firstName} {item?.lastName}</span>
