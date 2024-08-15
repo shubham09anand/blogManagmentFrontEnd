@@ -38,7 +38,7 @@ const Search = ({ text }) => {
                          const tags = response.data.response.response.flatMap(item => item.tags);
                          const uniqueTags = [...new Set(tags)]; // Ensure uniqueness
                          setDisplayTags(uniqueTags);
-                         setLoadBlog(true);
+                         setLoadTag(true);
                     }
                } catch (err) {
                     // toast.error("Error fetching tags");

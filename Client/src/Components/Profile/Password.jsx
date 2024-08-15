@@ -22,8 +22,10 @@ const Password = () => {
           setLoading(true);
           try {
                const response = await API.post("/setting", { "_id": userId, "password": newPassword });
-               toast.success("Password updated successfully!");
-               setNewPassword("")
+               if (response.data.response.success) {
+                    setNewPassword("")
+                    toast.success("Password updated successfully!");
+               }
           } catch (error) {
                toast.error("Failed to update password. Please try again.");
                console.error(error);
