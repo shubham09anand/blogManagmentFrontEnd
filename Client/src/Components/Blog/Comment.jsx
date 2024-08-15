@@ -40,7 +40,7 @@ const Comment = () => {
                 comments.map((item,key) => (
                     <div key={key} className="w-full p-6 text-base bg-white border-b">
                         <div className="flex justify-between items-center mb-2">
-                            <Link to={`/profile/${item._id}`} className="flex items-center">
+                            <Link to={`/profile/${item.authorId}`} className="flex items-center">
                                 <p className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900">
                                     <img className="mr-2 w-6 h-6 rounded-full border-2 border-black" src={item?.photo?.trim() !== "" ? item?.photo : noProfilePhoto} alt="Profile" />
                                     <span>{item?.firstName} {item?.lastName}</span>
