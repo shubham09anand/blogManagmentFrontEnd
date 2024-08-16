@@ -40,7 +40,7 @@ const Header = () => {
 
                <nav className="nav font-bold text-black md:text-lg">
                     <ul className="flex items-center">
-                         {!(currentLocation === "/blogs" || currentLocation.startsWith('/setting/') || currentLocation === "/write" || currentLocation === "/edit" || currentLocation.startsWith('/blogContent/') || currentLocation.startsWith('/profile/')) &&
+                         {!(currentLocation === "/blogs" || currentLocation.startsWith('/setting/') || currentLocation === "/write" || currentLocation.startsWith("/edit") || currentLocation.startsWith('/blogContent/') || currentLocation.startsWith('/profile/')) &&
                               (<>
                                    <li className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer active">
                                         <Link to='/signup'>Get Started</Link>

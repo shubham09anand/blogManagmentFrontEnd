@@ -14,7 +14,7 @@ const BlogEditor = () => {
     const config = useMemo(() => ({
         readonly: false,
         placeholder: 'Type here...',
-        height: 400,
+        height: 1000,
         spellcheck: true,
         buttons: [
             'bold', 'strikethrough', 'underline', 'italic', '|',
