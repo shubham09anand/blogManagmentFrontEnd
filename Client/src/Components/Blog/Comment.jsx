@@ -23,14 +23,14 @@ const Comment = () => {
                 toast.error("Failed to Load Comments");
                 // console.log(err);
             } finally {
-                setLoad(false); 
+                setLoad(false);
             }
         };
 
         if (blogId) {
             getBlog();
         } else {
-            setLoad(false); // Set loading to false if blogId is not present
+            setLoad(false); 
         }
     }, [blogId]);
 
@@ -39,12 +39,12 @@ const Comment = () => {
             <ToastContainer />
             <h1 className='text-lg lg:text-2xl font-bold tracking-wider fontTitle mb-4'>Comments</h1>
             {load ? (
-                <LoadingCommnet /> // Show loading component when loading
+                <LoadingCommnet />
             ) : comments.length === 0 ? (
                 <p className='font-thin fontTitle text-center w-fit mx-auto text-sm text-gray-400'>No comments available.</p>
             ) : (
                 comments.map((item, key) => (
-                    <div key={key} className="w-full text-base bg-white border-b">
+                    <div key={key} className="w-full text-base bg-white border-b py-3">
                         <div className="flex justify-between items-center mb-2">
                             <Link to={`/profile/${item.authorId}`} className="flex items-center">
                                 <p className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900">

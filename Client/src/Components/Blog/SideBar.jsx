@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import WriterList from './WriterList';
 import LaodTags from '../Animation/LaodTags';
 
 const SideBar = () => {
      const [load, setLoad] = useState(false)
-     setLoad(true)
+     useEffect(()=>{
+          setLoad(true)
+     },[])
      return (
           <div className='border-l-2 border-white hidden lg:block w-1/3 h-screen fixed right-0'>
                <div>

@@ -13,7 +13,8 @@ const BlogContent = () => {
      const noProfilePhoto = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
      const { blogId } = useParams();
      const [blog, setBlog] = useState([]);
-     const [load, setLoad] = useState(true)
+     const [load, setLoad] = useState(true);
+     const [tempComment, setTempComment] = useState([]);
 
      useEffect(() => {
           const getBlog = async () => {
@@ -62,8 +63,8 @@ const BlogContent = () => {
                                              <span key={e} className="bg-gray-200 rounded-full px-5 py-1 text-sm font-semibold text-gray-800">{i}</span>
                                         ))}
                                    </div>
-                                   <Comment />
-                                   <MakeComment />
+                                   <Comment/>
+                                   <MakeComment/>
                               </article>
                          </div>
                     </div>

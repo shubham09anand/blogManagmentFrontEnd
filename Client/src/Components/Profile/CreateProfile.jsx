@@ -214,8 +214,8 @@ const CreateProfile = () => {
                          </div>
                     </div>
                     <div className="mt-8 flex justify-end">
-                         <button onClick={handleSubmit} type="submit" className="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:bg-teal-600 dark:hover:bg-teal-900">
-                              Place Order
+                         <button onClick={handleSubmit} type="submit" className="bg-[#34ab45] text-white px-4 py-2 rounded-lg active:opacity-70">
+                              Sumbit
                          </button>
                     </div>
                </form>

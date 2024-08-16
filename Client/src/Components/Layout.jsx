@@ -26,9 +26,9 @@ const Layout = () => {
 
   // Define titles for static routes
   const titleMap = {
-    '/': 'Landing Page',
-    '/login': 'Login',
-    '/signup': 'Signup',
+    '/': 'Insider',
+    '/login': 'Insider',
+    '/signup': 'Insider',
     '/blogs': 'Blog List',
     '/setting': 'Profile Settings',
     '/write': 'Write Blog',
