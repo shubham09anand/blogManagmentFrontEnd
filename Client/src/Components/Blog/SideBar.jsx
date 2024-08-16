@@ -4,9 +4,7 @@ import LaodTags from '../Animation/LaodTags';
 
 const SideBar = () => {
      const [load, setLoad] = useState(false)
-     setTimeout(() => {
-          setLoad(true)
-     }, 4000)
+     setLoad(true)
      return (
           <div className='border-l-2 border-white hidden lg:block w-1/3 h-screen fixed right-0'>
                <div>

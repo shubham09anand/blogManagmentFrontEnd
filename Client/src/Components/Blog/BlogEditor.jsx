@@ -5,11 +5,13 @@ import { useSelector } from 'react-redux';
 import API from '../../Services/API';
 
 const BlogEditor = () => {
+
     const userId = useSelector((state) => state.LoginSlice.loggedUserId);
     const editor = useRef(null);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [tags, setTags] = useState(['']);
+    const [button, setButton] = useState(false)
 
     const config = useMemo(() => ({
         readonly: false,
@@ -58,15 +60,15 @@ const BlogEditor = () => {
 
     const validateInputs = () => {
         if (!title.trim()) {
-            toast.error("Title is required.");
+            toast.info("Title is required.");
             return false;
         }
         if (!content.trim()) {
-            toast.error("Content is required.");
+            toast.info("Content is required.");
             return false;
         }
         if (tags.length === 0 || tags.every(tag => !tag.trim())) {
-            toast.error("At least one tag is required.");
+            toast.info("At least one tag is required.");
             return false;
         }
         return true;
@@ -90,6 +92,8 @@ const BlogEditor = () => {
             return;
         }
         const createdAt = getCurrentTime();
+
+        setButton(true)
     
         const blogAllphoto = await getPhotoFromContnet(content);
     
@@ -105,21 +109,33 @@ const BlogEditor = () => {
         try {
             const response = await API.post('/createBlog', requestData);
             toast.success("Blog Has Been Posted")
+            resetForm();
+            // setButton(false)
         } catch (error) {
             console.log("Error ", error);
         }
+        finally{
+            setButton(true)
+        }
     };
+
+    const resetForm = () =>{
+        setTitle("");
+        setContent("");
+        setTags(['']);
+        setContent("");
+    }
 
     return (
         <div className='w-screen bg-[#f7f4ed]'>
             <div className='w-full md:w-3/5 mx-auto'>
                 <ToastContainer />
                 <div className="px-2">
-                    <div className="bg-[#f7f4ed] font font-semibold flex text-2xl fixed py-5 place-content-center items-center justify-between w-80">
+                    <div className="bg-[#f7f4ed] font font-semibold flex text-2xl fixed py-5 place-content-center items-center space-x-10 w-fit">
                         <div>Write Your Blog Here</div>
-                        <div onClick={makeBlog} className='w-fit h-fit text-sm px-4 py-1 rounded-full bg-black text-white font-semibold cursor-pointer select-none'>
-                            Post It
-                        </div>
+                        <button disabled={button} onClick={makeBlog} className={`w-fit h-fit text-sm px-4 py-1 rounded-full bg-black text-white font-semibold select-none ${button ? 'cursor-not-allowed opacity-50' : ''}` }>
+                            {button ? 'Posting' : 'Post Blog'}
+                        </button>
                     </div>
 
                     <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="name" id="name" placeholder="Title" className="w-full fontTitle bg-[#f7f4ed] py-2 px-6 pl-3 mt-20 text-4xl font-medium outline-none focus:border-[#16831f] focus:shadow-md placeholder:tracking-wider"/>
@@ -161,7 +177,4 @@ const BlogEditor = () => {
         </div>
     );
 }
-
 export default BlogEditor;
-
-

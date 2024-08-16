@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
 const BlogList = () => {
+
+     const blogImageErr = "https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg";
      const noProfilePhoto = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
      const [blogs, setBlogs] = useState([])
      const [focus, setFocous] = useState(false)
@@ -21,9 +23,7 @@ const BlogList = () => {
                     const response = await API.post('/getAllBlogs');
                     if (response.data.response.success) {
                          setBlogs(response.data.response.response);
-                         setTimeout(()=>{
-                              setLoad(true)
-                         },4000)
+                         setLoad(true)
                          // console.log(response.data.response.response);
                     } else {
                          toast.error("Failed to Load Blogs");
@@ -81,7 +81,7 @@ const BlogList = () => {
                                                   </Link>
                                              </div>
                                              <Link to={`/blogContent/${items?._id}`} className=" rounded px-4 leading-normal w-full flex">
-                                                  <img className="shadow-[1px_1px_5px_gray] md:rounded-md mr-5 h-16 w-24 md:h-40 md:w-60 flex-none bg-cover overflow-hidden" src={items?.blogPhoto} alt="imageError"/>
+                                                  <img className="shadow-[1px_1px_5px_gray] md:rounded-md mr-5 h-16 w-24 md:h-40 md:w-60 flex-none bg-cover overflow-hidden" src={items?.blogPhoto} onError={(e)=>e.target.src = blogImageErr} alt="imageError"/>
                                                   <div>
                                                        <div className="md:mt-0 font-bold md:text-lg lg:text-2xl line-clamp-1 md:line-clamp-2" style={{ fontFamily: "sohne, Helvetica Neue, Helvetica, Arial, sans-serif" }}>
                                                             {items?.title}

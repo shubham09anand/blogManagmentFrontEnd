@@ -82,7 +82,7 @@ const CreateProfile = () => {
                   pronouns: pronouns,
                   interestedTopics: tags.join(', '), // Convert tags array to a comma-separated string
                   aboutYou: aboutYou,
-                  photo: "image",
+                  photo: image,
               },
           };
       
@@ -98,12 +98,20 @@ const CreateProfile = () => {
           }
       };
       
-     const handleImageChange = (e) => {
+      const handleImageChange = (e) => {
           const file = e.target.files[0];
           if (file) {
-               setImage(URL.createObjectURL(file));
+              const reader = new FileReader();
+              
+              reader.onloadend = () => {
+                  // Convert the file to base64 string
+                  const base64String = reader.result;
+                  setImage(base64String);
+              };
+      
+              reader.readAsDataURL(file);
           }
-     };
+      };
 
      useEffect(() => {
           const getUserProfile = async () => {

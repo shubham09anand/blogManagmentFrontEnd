@@ -17,9 +17,7 @@ const WriterList = () => {
                     const response = await API.post('/getWriters');
                     if (response.data.response.success) {
                          setWriters(response.data.response.response);
-                         setTimeout(()=>{
-                              setLoad(true)
-                         },4000)
+                         setLoad(true)
                          // console.log(response.data.response.response);
                     }
                } catch (err) {

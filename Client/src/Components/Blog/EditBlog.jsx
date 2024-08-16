@@ -144,9 +144,7 @@ const EditBlog = () => {
                console.log(response);
                if (response.data.response.success) {
                     toast.success("Blog Updated")
-                    setTimeout(() => {
-                         setButton(false)
-                    }, 4000)
+                    setButton(false)
                }
           } catch (error) {
                console.log("Error ", error.data);
@@ -154,9 +152,7 @@ const EditBlog = () => {
                setButton(false)
           }
           finally {
-               setTimeout(() => {
-                    setButton(false)
-               }, 4000)
+               setButton(false)
           }
      };
 

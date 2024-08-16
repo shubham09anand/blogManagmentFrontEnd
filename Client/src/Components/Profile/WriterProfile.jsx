@@ -11,6 +11,7 @@ import LaodingProfile from '../Animation/LaodingProfile';
 
 const WriterProfile = () => {
 
+     const blogImageErr = "https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg";
      const noProfilePhoto = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
      const userId = useSelector((state) => (state.LoginSlice.loggedUserId));
      const { authorId } = useParams();
@@ -27,15 +28,11 @@ const WriterProfile = () => {
                     const response = await API.get(`/getWriterBlog/${authorId}`);
                     if (response.data.response.success) {
                          setBlogs(response.data.response.response);
-                         setTimeout(() => {
-                              setLoad(true)
-                         }, 4000)
+                         setLoad(true)
                     }
                     else if (response.data.response.success === false) {
                          setIsBlog(true)
-                         setTimeout(() => {
-                              setLoad(true)
-                         }, 2000)
+                         setLoad(true)
                     }
                } catch (err) {
                     toast.error("Failed to Load Blogs");
@@ -53,9 +50,7 @@ const WriterProfile = () => {
                     const response = await API.get(`/getWriterProfile/${authorId}`);
                     if (response.data.response.success) {
                          setUserProfile(response.data.response.response[0]);
-                         setTimeout(() => {
-                              setLoadProfile(false)
-                         }, 4000);
+                         setLoadProfile(false)
                     }
                } catch (err) {
                     toast.error("Failed to Load Profile");
@@ -74,9 +69,10 @@ const WriterProfile = () => {
                if (response.data.response.success) {
                     setBlogs(blogs.filter((_, i) => i !== index));
                     setShowDelete(null);
+                    toast.success("Blog Has Been Removed")
                }
-               console.log(response.data.response.success)
-               console.log(response.data.response.response)
+               // console.log(response.data.response.success)
+               // console.log(response.data.response.response)
           } catch (err) {
                toast.error("Failed to Load Profile");
           }
@@ -142,7 +138,7 @@ const WriterProfile = () => {
                                    <Link to={`/blogContent/${items?._id}`} className="mt-2 bg-white rounded px-4 leading-normal w-full flex">
                                         <img
                                              className="shadow-[1px_1px_5px_gray] md:rounded-md mr-5 h-16 w-24 md:h-40 md:w-60 flex-none bg-cover overflow-hidden"
-                                             src={items?.blogPhoto}
+                                             src={items?.blogPhoto} onError={(e)=>e.target.src = blogImageErr}
                                              alt="imageNone"
                                         />
                                         <div>
@@ -189,8 +185,8 @@ const WriterProfile = () => {
                          <div className="bg-white p-3">
                               <div className='flex gap-x-5 place-content-center items-center mb-5'>
                                    <div className="image overflow-hidden">
-                                        <img className="hidden lg:block flex-shrink-0 object-cover rounded-full h-36 lg:h-52 bg-gray-500 border-2 border-black" src={userProfile?.photo.length > 0 ? userProfile?.photo[0]?.trim() : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} alt="imageError" />
-                                        <img className="block lg:hidden flex-shrink-0 object-cover rounded-full h-36 bg-gray-500" src={userProfile?.photo.length > 0 ? userProfile?.photo[0]?.trim() : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} alt="imageError" />
+                                        <img className="hidden lg:block flex-shrink-0 object-cover rounded-full w-48 h-48 bg-gray-500 border-2 border-black" src={userProfile?.photo.length > 0 ? userProfile?.photo[0]?.trim() : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} alt="imageError" />
+                                        <img className="block lg:hidden flex-shrink-0 object-cover rounded-full w-36 h-36 bg-gray-500" src={userProfile?.photo.length > 0 ? userProfile?.photo[0]?.trim() : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} alt="imageError" />
                                    </div>
                                    <div>
                                         <h1 className="text-gray-900 font-bold text-3xl leading-8 my-1 capitalize">{userProfile?.firstName} {userProfile?.lastName}</h1>
