@@ -15,18 +15,14 @@ const Login = () => {
      const [button, setButton] = useState(false);
      const [logIn, setLogin] = useState(false)
 
-     useState(() => {
-          document.getElementById("root")
-     })
-
      // Validate inputs before making the API call
      const validateInputs = () => {
           if (!userName.trim()) {
-               toast.error("Username is required.");
+               toast.info("Username is required.");
                return false;
           }
           if (!password.trim()) {
-               toast.error("Password is required.");
+               toast.info("Password is required.");
                return false;
           }
           return true;
@@ -46,8 +42,10 @@ const Login = () => {
                     localStorage.setItem('user_Id_BlogMangement', response.data.response.response.id);
                     localStorage.setItem('user_Token_BlogMangement', response.data.response.response.token);
                     dispatch(setLoginData({ token: response.data.response.response.token, userId: response.data.response.response.id }));
-                    setLogin(false)
+                    setTimeout(() => {
+                         setLogin(false)
                     navigate("/blogs")
+                    }, 4000);
                }
                else if(response.data.response.success === false){
                     setLogin(true)
@@ -58,7 +56,10 @@ const Login = () => {
                setLogin(true)
           } finally {
                if (!logIn) {
-                    setButton(false);
+                    setTimeout(() => {
+                         
+                         setButton(false);
+                    }, 4000);
                }
           }
      };
@@ -82,7 +83,7 @@ const Login = () => {
                               <input onChange={(e) => setPassword(e.target.value)} value={password} className="pl-2 outline-none border-none bg-transparent w-full" type="password" name="" id="Password" placeholder="Password" />
                          </div>
                          {logIn && (<div className='text-sm teact-balck tracking-tight text-center'>Wrong Credentials</div>)}
-                         <button disabled={button} onClick={tryLogin} className="block w-full bg-[#34ab45] mt-4 py-2 rounded-sm text-white font-semibold mb-2">Log In</button>
+                         <button disabled={button} onClick={tryLogin} className={`block w-full bg-[#34ab45] mt-4 py-2 rounded-sm text-white font-semibold mb-2 active:opacity-20 ${button ? "cursor-not-allowed opacity-50":"cursor-pointer"}`}>Log In</button>
                     </div>
                </div>
                <div className="hidden lg:mt-0 lg:col-span-5 lg:flex absolute z-10 top-0 right-0 opacity-75 lg:opacity-100">
