@@ -13,7 +13,6 @@ const BlogContent = () => {
      const { blogId } = useParams();
      const [blog, setBlog] = useState([]);
      const [load, setLoad] = useState(true);
-     const [tempComment, setTempComment] = useState([]);
 
      useEffect(() => {
           const getBlog = async () => {
