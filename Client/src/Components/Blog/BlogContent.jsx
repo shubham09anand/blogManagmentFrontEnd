@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Comment from './Comment'
 import MakeComment from './MakeComment'
-import SimlarArtciles from './SimlarArtciles'
 import API from '../../Services/API';
 import moment from 'moment';
 import LoadingBlog from '../Animation/LoadingBlog';
@@ -70,7 +69,6 @@ const BlogContent = () => {
                     </div>
                )}
                {load && (<LoadingBlog />)}
-               <SimlarArtciles />
           </>
      )
 }
