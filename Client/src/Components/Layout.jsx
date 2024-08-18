@@ -12,6 +12,7 @@ import ProfileSetting from './Profile/ProfileSetting';
 import BlogContent from './Blog/BlogContent';
 import BlogEditor from './Blog/BlogEditor';
 import EditBlog from './Blog/EditBlog';
+import AuthFailed from './Auth/AuthFailed';
 import ProtectedRoute from './Auth/ProtectedRoute';
 
 const useDocumentTitle = (title) => {
@@ -62,18 +63,18 @@ const Layout = () => {
         pathname.startsWith('/profile/')
       ) && <Header />}
 
-      <ProtectedRoute/>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/blogs" element={<BlogList />} />
-        <Route path="/profile/:authorId" element={<WriterProfile />} />
-        <Route path="/setting/:authorId" element={<ProfileSetting />} />
-        <Route path="/blogContent/:blogId" element={<BlogContent />} />
-        <Route path="/write" element={<BlogEditor />} />
-        <Route path="/edit/:blogId" element={<EditBlog />} />
-        <Route path="*" element={<Error404 />} />
+        <Route path="/" element={<LandingPage/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/signup" element={<Signup/>} />
+        <Route path="/blogs" element={<ProtectedRoute><BlogList/></ProtectedRoute>} />
+        <Route path="/profile/:authorId" element={<ProtectedRoute><WriterProfile/></ProtectedRoute>} />
+        <Route path="/setting/:authorId" element={<ProtectedRoute><ProfileSetting/></ProtectedRoute>} />
+        <Route path="/blogContent/:blogId" element={<ProtectedRoute><BlogContent/></ProtectedRoute>} />
+        <Route path="/write" element={<ProtectedRoute><BlogEditor/></ProtectedRoute>} />
+        <Route path="/edit/:blogId" element={<ProtectedRoute><EditBlog/></ProtectedRoute>} />
+        <Route path="/authFailed" element={<AuthFailed/>} />
+        <Route path="*" element={<Error404/>} />
       </Routes>
     </>
   );

@@ -108,14 +108,12 @@ const EditBlog = () => {
      };
 
      const getPhotoFromContnet = async (htmlContent) => {
-          console.log(htmlContent)
           const imgSrcRegex = /src="([^"]*)"/g;
           let imgSrc;
           const imgSrcArray = [];
 
           // Extract all image src values
           while ((imgSrc = imgSrcRegex.exec(htmlContent)) !== null) {
-               console.log(imgSrc)
                imgSrcArray.push(imgSrc[1]);
           }
           return imgSrcArray
@@ -130,7 +128,6 @@ const EditBlog = () => {
           setButton(true)
 
           const blogAllphoto = await getPhotoFromContnet(content);
-          console.log(blogAllphoto)
 
           const updateBlog = {
                _id: blogId,
@@ -143,7 +140,6 @@ const EditBlog = () => {
 
           try {
                const response = await API.post('/updateBlog', updateBlog);
-               console.log(response);
                if (response.data.response.success) {
                     toast.success("Blog Updated")
                     setButton(false)
