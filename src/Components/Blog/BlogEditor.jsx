@@ -108,7 +108,7 @@ const BlogEditor = () => {
         };
 
         try {
-            const response = await API.post('/createBlog', requestData);
+            await API.post('/createBlog', requestData);
             toast.success("Blog Has Been Posted")
             resetForm();
             // setButton(false)
