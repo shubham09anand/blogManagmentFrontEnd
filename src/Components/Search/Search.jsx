@@ -52,9 +52,7 @@ const Search = ({ text }) => {
                     const response = await API.post('/getAllWriterName');
                     if (response.data.response.success) {
                          setDisplayWriters(response.data.response.response);
-                         setTimeout(() => {
-                              setLoadWriters(true)
-                         }, 4000)
+                         setLoadWriters(true)
                     }
                } catch (err) {
                     toast.error("Error fetching writers");
@@ -68,9 +66,7 @@ const Search = ({ text }) => {
                     const response = await API.post('/getAllBlogs');
                     if (response.data.response.success) {
                          setBlogData(response.data.response.response);
-                         setTimeout(() => {
-                              setLoadBlog(true)
-                         }, 4000)
+                         setLoadBlog(true)
                     }
                } catch (err) {
                     toast.error("Error fetching blogs");

@@ -56,10 +56,7 @@ const Login = () => {
                setLogin(true)
           } finally {
                if (!logIn) {
-                    setTimeout(() => {
-                         
-                         setButton(false);
-                    }, 4000);
+                    setButton(false);
                }
           }
      };
