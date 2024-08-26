@@ -34,8 +34,8 @@ const BlogList = () => {
                     // console.log(err);
                }
           };
-
           getAllTags();
+          // eslint-disable-next-line
      }, []);
 
      return (

@@ -175,7 +175,7 @@ const BlogEditor = () => {
                     {
                         inst && (
                             <div className='shadow-[2px_2px_2px_gray] absolute bg-slate-100 w-60 h-fit p-2 rounded-md backdrop-blur-lg top-2 -right-[230%] z-20 text-sm font-thin fontTitle'>
-                                <div>Double Tap On Images To For Customimze its size, psoition, rounded-border and more </div>
+                                <div>Double tap on image to for Customimzation like its size, psoition, rounded-border and more </div>
                                 <svg onClick={() => setInst(false)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="white" className="size-4 absolute top-0 right-0 bg-black rounded cursor-pointer">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                                 </svg>
