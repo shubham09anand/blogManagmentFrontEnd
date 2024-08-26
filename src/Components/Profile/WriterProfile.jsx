@@ -94,9 +94,9 @@ const WriterProfile = () => {
                                    <div className="flex justify-between mb-2 pl-4">
                                         <div className='flex py-5 place-content-center items-center'>
                                              <img src={items?.photo && items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} className="h-8 w-8 rounded-full mr-2 object-cover border-2 border-black" alt="Author" />
-                                             <div className={`space-x-4 sm:hidden ${showDelete !== null && showDelete === key ? 'hidden' : 'flex'}`}>
+                                             <div className={`space-x-3 sm:hidden ${showDelete !== null && showDelete === key ? 'hidden' : 'flex'}`}>
                                                   <p className="fontTitle font-semibold text-sm capitalize">{items.firstName} {items.lastName}</p>
-                                                  <p className="fontTitle text-sm font-medium">{moment(items?.createdAt).format('MMMM Do YYYY')}</p>
+                                                  <p className="fontTitle text-sm font-medium">{moment(items?.createdAt).format('DD/MM/YYYY')}</p>
                                              </div>
                                              <div className="flex space-x-3 md:space-x-4">
                                                   <p className="hidden sm:block fontTitle font-semibold text-sm capitalize">{items.firstName} {items.lastName}</p>
@@ -191,19 +191,19 @@ const WriterProfile = () => {
                                         {userProfile?.userName === "@shubham" && (
                                              <>
                                                   <div className='flex gap-x-5 my-2 mb-4 flex-wrap gap-y-2'>
-                                                       <h3 className="gap-x-2 flex place-content-center items-center text-gray-900 bg-gray-200 w-fit h-fit px-2 rounded-full font-lg font-bold text-semibold leading-6 capitalize">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" strokeWidth="2" className="bi bi-code-slash size-5" viewBox="0 0 16 16">
+                                                       <div className="gap-x-2 flex place-content-center items-center text-gray-900 bg-gray-200 w-fit h-fit px-2 rounded-full text-semibold leading-6 capitalize">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" strokeWidth="2" className="bi bi-code-slash size-4" viewBox="0 0 16 16">
                                                                  <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0" />
                                                             </svg>
-                                                            Devploer
-                                                       </h3>
-                                                       <h3 className="gap-x-3 flex place-content-center items-centertext-gray-900 bg-gray-200 w-fit h-fit px-2 rounded-full font-lg font-bold text-semibold leading-6 capitalize">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" strokeWidth="2" className="bi bi-key size-5 scale-125 mt-1" viewBox="0 0 16 16">
+                                                            <div className='text-sm font-bold'>Devploer</div>
+                                                       </div>
+                                                       <div className="gap-x-3 flex place-content-center items-centertext-gray-900 bg-gray-200 w-fit h-fit px-2 rounded-full text-semibold leading-6 capitalize">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" strokeWidth="2" className="bi bi-key size-5 pl-1 scale-150" viewBox="0 0 16 16">
                                                                  <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8m4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5" />
                                                                  <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
                                                             </svg>
-                                                            Owner
-                                                       </h3>
+                                                            <div className='text-sm font-bold'>Owner</div>
+                                                       </div>
                                                   </div>
                                                   <div className='flex'>
                                                        <a href="https://www.instagram.com/shubham09anand/" target='_'>
@@ -287,9 +287,6 @@ const WriterProfile = () => {
                          </div>
                     </div>
                }
-
-
-
           </div >
      )
 }
