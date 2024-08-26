@@ -14,7 +14,6 @@ import BlogEditor from './Blog/BlogEditor';
 import EditBlog from './Blog/EditBlog';
 import AuthFailed from './Auth/AuthFailed';
 import ProtectedRoute from './Auth/ProtectedRoute';
-import InternetSpeedTest from './InternetSpeedTest';
 
 const useDocumentTitle = (title) => {
   useEffect(() => {
@@ -64,7 +63,6 @@ const Layout = () => {
         pathname.startsWith('/profile/')
       ) && <Header />}
 
-<InternetSpeedTest/>
       <Routes>
         <Route path="/" element={<LandingPage/>} />
         <Route path="/login" element={<Login/>} />
