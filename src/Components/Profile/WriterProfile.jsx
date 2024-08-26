@@ -54,7 +54,6 @@ const WriterProfile = () => {
                     }
                } catch (err) {
                     toast.error("Failed to Load Profile");
-                    // console.log(err);
                }
           };
 
@@ -71,8 +70,6 @@ const WriterProfile = () => {
                     setShowDelete(null);
                     toast.success("Blog Has Been Removed")
                }
-               // console.log(response.data.response.success)
-               // console.log(response.data.response.response)
           } catch (err) {
                toast.error("Failed to Load Profile");
           }
@@ -96,7 +93,7 @@ const WriterProfile = () => {
                                    </div>
                                    <div className="flex justify-between mb-2 pl-4">
                                         <div className='flex py-5 place-content-center items-center'>
-                                             <img src={items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} className="h-8 w-8 rounded-full mr-2 object-cover border-2 border-black" alt="Author" />
+                                             <img src={items?.photo && items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} className="h-8 w-8 rounded-full mr-2 object-cover border-2 border-black" alt="Author" />
                                              <div className={`space-x-4 sm:hidden ${showDelete !== null && showDelete === key ? 'hidden' : 'flex'}`}>
                                                   <p className="fontTitle font-semibold text-sm capitalize">{items.firstName} {items.lastName}</p>
                                                   <p className="fontTitle text-sm font-medium">{moment(items?.createdAt).format('MMMM Do YYYY')}</p>

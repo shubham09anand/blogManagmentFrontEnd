@@ -159,7 +159,7 @@ const EditBlog = () => {
                <div className='p-2 w-full md:w-3/5 mx-auto'>
                     <ToastContainer />
                     <div className="bg-[#f7f4ed] w-fit font font-semibold md:flex text-2xl fixed py-5 space-x-0 md:space-x-5">
-                         <div className='line-clamp-1 w-full md:w-4/5 lg:w-11/12'>Update Blog: {title}</div>
+                         <div className='line-clamp-1 w-full md:w-3/5'>Update Blog: {title}</div>
                          <button disabled={button} onClick={updateBlog} className={`w-fit h-fit text-sm px-4 py-1 rounded-full bg-black text-white font-semibold select-none ${button ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}>
                               {button ? 'Updating...' : 'Update'}
                          </button>
@@ -186,7 +186,7 @@ const EditBlog = () => {
                                                        <path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                                   </svg>
                                              )}
-                                             <input type="text" name={`tag-${index}`} id={`tag-${index}`} value={tag} onChange={(e) => handleTagChange(index, e.target.value)} placeholder="Tag" className="shadow fontTitle m-1 mx-3 w-36 border-b border-r border-slate-200 bg-[#f7f4ed] py-1 px-6 pl-3 font-medium outline-none focus:border-[#16831f] focus:shadow-md my-2" />
+                                             <input type="text" name={`tag-${index}`} id={`tag-${index}`} value={tag} onChange={(e) => handleTagChange(index, e.target.value)} placeholder="Tag" className="shadow fontTitle m-1 mr-3 w-36 border-b border-r border-slate-200 bg-[#f7f4ed] py-1 px-6 pl-3 font-medium outline-none focus:border-[#16831f] focus:shadow-md my-2" />
                                         </div>
                                    ))}
                               </div>

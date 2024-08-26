@@ -2,21 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-.element {
-     /* Default styles for screens smaller than 500px */
- }
- 
- /* Custom breakpoint at 500px */
- @media (min-width: 450px) {
+/* Custom breakpoint at 500px */
+@media (min-width: 450px) {
      .element-500\:h-400 {
-         height: 130px;
+          height: 130px;
      }
- 
+
      .element-500\:w-400 {
-         width: 130px;
+          width: 130px;
      }
- }
- 
+}
+
 ::-webkit-scrollbar {
      width: 5px;
      background: rgb(255, 255, 255);

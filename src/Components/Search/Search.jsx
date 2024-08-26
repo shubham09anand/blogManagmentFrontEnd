@@ -8,7 +8,9 @@ import LoadFilterBlog from '../Animation/LoadFilterBlog';
 import LaodTags from '../Animation/LaodTags';
 
 const Search = ({ text }) => {
-     const noProfilePhoto = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+     const noProfilePhoto = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
+     const blogImageErr = "https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg";
+
      const [selectedOption, setSelectedOption] = useState('writers');
      const [displayTags, setDisplayTags] = useState([]);
      const [displayWriters, setDisplayWriters] = useState([]);
@@ -153,7 +155,7 @@ const Search = ({ text }) => {
                    
                     {LaodTag && selectedOption === 'writers' && displayWriters?.map((item, key) => (
                          <div onClick={() => setSelectedWriter(item?.firstName)} key={key} className="flex place-content-center items-center space-x-3 relative px-5 py-2 m-2 bg-gray-200 rounded-full cursor-pointer select-none font-semibold tracking-wide shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 text-gray-900">
-                              <img src={item?.photo?.trim() !== "" ? item?.photo : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} alt="authorImage" className='border-2 border-black w-8 h-8 rounded-full bg-cover' />
+                              <img src={item?.photo && item?.photo?.trim() !== "" ? item?.photo : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} alt="authorImage" className='border-2 border-black w-8 h-8 rounded-full bg-cover' />
                               <span className="text-sm capitalize">{`${item?.firstName} ${item?.lastName}`}</span>
                          </div>
                     ))}
@@ -164,9 +166,9 @@ const Search = ({ text }) => {
                     {loadBlog && filteredBlogs?.map((items, index) => (
                          <Link to={`/blogContent/${items._id}`} key={index} className="w-11/12 lg:w-1/5">
                               <div className="shadow-md border border-gray-200 rounded-lg max-w-sm">
-                                   <img className="rounded-t-lg h-48 w-full" src={items?.blogPhoto} alt="imageError" />
+                                   <img className="rounded-t-lg h-48 w-full" src={items?.blogPhoto} onError={(e) => e.target.src = blogImageErr} alt="imageError" />
                                    <div className='flex items-center space-x-2 mt-3 pl-5'>
-                                        <img src={items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} alt="err" className='text-sm w-10 h-10 rounded-full border-2 border-black' />
+                                        <img src={items?.photo && items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} alt="err" className='text-sm w-10 h-10 rounded-full border-2 border-black' />
                                         <div>
                                              <div className="capitalize">{`${items.firstName} ${items.lastName}`}</div>
                                              <div className="text-[10px] font-light capitalize">{moment(items?.createdAt).format('MMMM Do YYYY')}</div>

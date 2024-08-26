@@ -116,7 +116,7 @@ const BlogEditor = () => {
             console.log("Error ", error);
         }
         finally {
-            setButton(true)
+            setButton(false)
         }
     };
 
@@ -133,13 +133,13 @@ const BlogEditor = () => {
                 <ToastContainer />
                 <div className="px-2">
                     <div className="bg-[#f7f4ed] font font-semibold flex text-2xl fixed py-5 place-content-center items-center space-x-10 w-fit">
-                        <div>Write Your Blog Here</div>
+                        <div className='text-xl sm:text-2xl'>Write Your Blog Here</div>
                         <button disabled={button} onClick={makeBlog} className={`w-fit h-fit text-sm px-4 py-1 rounded-full bg-black text-white font-semibold select-none ${button ? 'cursor-not-allowed opacity-50' : ''}`}>
                             {button ? 'Posting' : 'Post Blog'}
                         </button>
                     </div>
 
-                    <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="name" id="name" placeholder="Title" className="w-full fontTitle bg-[#f7f4ed] py-2 px-6 pl-3 mt-20 text-4xl font-medium outline-none focus:border-[#16831f] focus:shadow-md placeholder:tracking-wider" />
+                    <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="name" id="name" placeholder="Title" className="w-full fontTitle bg-[#f7f4ed] py-2 px-6 pl-3 mt-16 text-4xl font-medium outline-none focus:border-[#16831f] focus:shadow-md placeholder:tracking-wider" />
 
                     <div className='mt-2'>
                         <div className='flex space-x-5'>
@@ -160,7 +160,7 @@ const BlogEditor = () => {
                                             <path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                         </svg>
                                     )}
-                                    <input type="text" name={`tag-${index}`} id={`tag-${index}`} value={tag} onChange={(e) => handleTagChange(index, e.target.value)} placeholder="Tag" className="shadow fontTitle m-1 mx-3 w-36 border-b border-r border-slate-200 bg-[#f7f4ed] py-1 px-6 pl-3 font-medium outline-none focus:border-[#16831f] focus:shadow-md my-2" />
+                                    <input type="text" name={`tag-${index}`} id={`tag-${index}`} value={tag} onChange={(e) => handleTagChange(index, e.target.value)} placeholder="Tag" className="shadow fontTitle m-1 mr-3 w-36 border-b border-r border-slate-200 bg-[#f7f4ed] py-1 px-6 pl-3 font-medium outline-none focus:border-[#16831f] focus:shadow-md my-2" />
                                 </div>
                             ))}
                         </div>
@@ -168,7 +168,7 @@ const BlogEditor = () => {
                 </div>
 
                 <div className='flex items-center gap-x-5 w-fit place-content-center relative'>
-                    <div className="mb-2 font-semibold block text-lg pt-1">Content</div>
+                    <div className="mb-2 font-semibold block text-lg pt-1 px-2">Content</div>
                     <svg onClick={() => setInst(true)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6 my-auto cursor-pointer">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
                     </svg>

@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import WriterList from './WriterList';
-import LaodTags from '../Animation/LaodTags';
+// import LaodTags from '../Animation/LaodTags';
 
 const SideBar = () => {
-     const [load, setLoad] = useState(false)
-     useEffect(()=>{
-          setLoad(true)
-     },[])
+     // const [load, setLoad] = useState(false)
+     // useEffect(()=>{
+     //      setLoad(true)
+     // },[])
      return (
           <div className='border-l-2 border-white hidden lg:block w-1/3 h-screen fixed right-0'>
-               <div>
+               {/* <div>
                     <div className='text-2xl font-bold pl-6 pb-3'>Recommended topics</div>
                     <div>
                          {load && <div className="px-4 flex justify-cente flex-wrap">
@@ -36,7 +36,7 @@ const SideBar = () => {
                          </div>}
                          {!load && <span className='ml-4'><LaodTags /></span>}
                     </div>
-               </div>
+               </div> */}
                <WriterList />
           </div>
      )
