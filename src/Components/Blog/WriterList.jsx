@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import API from '../../Services/API';
 import LoadWriterList from '../Animation/LoadWriterList';
@@ -8,6 +9,7 @@ import LoadWriterList from '../Animation/LoadWriterList';
 const WriterList = () => {
 
      const noProfilePhoto = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
+     const userId = useSelector((state) => (state.LoginSlice.loggedUserId));
      const [writers, setWriters] = useState([]);
      const [load, setLoad] = useState(false);
 
