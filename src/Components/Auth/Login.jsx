@@ -43,7 +43,7 @@ const Login = () => {
                     localStorage.setItem('user_Token_BlogMangement', response.data.response.response.token);
                     dispatch(setLoginData({ token: response.data.response.response.token, userId: response.data.response.response.id }));
                     setLogin(false)
-                    navigate("/blogs")
+                    navigate("/insider/blogs")
                }
                else if(response.data.response.success === false){
                     setLogin(true)

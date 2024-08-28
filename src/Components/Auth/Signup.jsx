@@ -69,7 +69,7 @@ const Signup = () => {
             if (response.data.response.success && response.data.response.status === 200) {
                 setSignupSuccessful(true);
                 setTimeout(() => {
-                    navigate('/login');
+                    navigate('/insider/login');
                 }, 3000)
             } else {
                 toast.info("Username Already Taken");

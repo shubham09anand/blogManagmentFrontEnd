@@ -76,12 +76,12 @@ const BlogList = () => {
                                         <div>
                                              <div className="flex items-center mb-2 pl-4 py-4">
                                                   <img src={items?.photo && items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} onError={(e)=> e.target.src = noProfilePhoto} className="h-8 w-8 rounded-full mr-2 object-cover border-2 border-black" alt="err" />
-                                                  <Link to={`/profile/${items?.authorId}`} className='flex place-content-center items-center space-x-6'>
+                                                  <Link to={`/insider/profile/${items?.authorId}`} className='flex place-content-center items-center space-x-6'>
                                                        <p className="fontTitle font-semibold text-sm capitalize">{items?.firstName} {items?.lastName}</p>
                                                        <p className="fontTitle text-sm font-medium">{moment(items?.createdAt).format('MMMM Do YYYY')}</p>
                                                   </Link>
                                              </div>
-                                             <Link to={`/blogContent/${items?._id}`} className=" rounded px-4 leading-normal w-full flex">
+                                             <Link to={`/insider/blogContent/${items?._id}`} className=" rounded px-4 leading-normal w-full flex">
                                                   <img className="shadow-[1px_1px_5px_gray] md:rounded-md mr-5 h-16 w-24 md:h-40 md:w-60 flex-none bg-cover overflow-hidden" src={items?.blogPhoto} onError={(e)=>e.target.src = blogImageErr} alt="imageError"/>
                                                   <div>
                                                        <div className="md:mt-0 font-bold md:text-lg lg:text-2xl line-clamp-1 md:line-clamp-2" style={{ fontFamily: "sohne, Helvetica Neue, Helvetica, Arial, sans-serif" }}>

@@ -16,7 +16,7 @@ const LandingPage = () => {
                          </p>
 
                          <div className="absolute z-20 space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
-                              <Link to="./signup" className="inline-flex items-center text-xl justify-center w-full px-5 py-3 font-medium text-center border bg-gray-900 text-white border-gray-200 rounded-full sm:w-auto">
+                              <Link to="/insider/signup" className="inline-flex items-center text-xl justify-center w-full px-5 py-3 font-medium text-center border bg-gray-900 text-white border-gray-200 rounded-full sm:w-auto">
                                    Start Reading
                               </Link>
                          </div>

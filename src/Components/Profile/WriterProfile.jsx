@@ -105,7 +105,7 @@ const WriterProfile = () => {
                                         </div>
                                         {userId === authorId && (
                                              <div className='flex items-center'>
-                                                  <Link to={`/edit/${items._id}`} className={`px-4 border-opacity-0 hover:border-opacity-100 duration-200 cursor-pointer ${showDelete !== null && showDelete === key ? 'hidden' : 'flex'}`}>
+                                                  <Link to={`/insider/edit/${items._id}`} className={`px-4 border-opacity-0 hover:border-opacity-100 duration-200 cursor-pointer ${showDelete !== null && showDelete === key ? 'hidden' : 'flex'}`}>
                                                        <div className='flex place-content-center items-center font-thin space-x-4 sm:text-lg'>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="size-[22px]">
                                                                  <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
@@ -132,7 +132,7 @@ const WriterProfile = () => {
                                         )
                                         }
                                    </div>
-                                   <Link to={`/blogContent/${items?._id}`} className="mt-2 bg-white rounded px-4 leading-normal w-full flex">
+                                   <Link to={`/insider/blogContent/${items?._id}`} className="mt-2 bg-white rounded px-4 leading-normal w-full flex">
                                         <img
                                              className="shadow-[1px_1px_5px_gray] md:rounded-md mr-5 h-16 w-24 md:h-40 md:w-60 flex-none bg-cover overflow-hidden"
                                              src={items?.blogPhoto} onError={(e) => e.target.src = blogImageErr}
@@ -153,7 +153,7 @@ const WriterProfile = () => {
                          <LoadBlog show={true} key={index} />
                     ))}
                     {(authorId === userId && isBlog) &&
-                         <Link to='/write' className='mx-auto w-fit'>
+                         <Link to='/insider/write' className='mx-auto w-fit'>
                               <div className='cursor-pointer select-none hover:opacity-75 rounded-full  mt-20 mb-5 px-10 py-4 bg-gray-950 text-white flex place-content-center items-center w-fit space-x-5 mx-auto'>
                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-8">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />

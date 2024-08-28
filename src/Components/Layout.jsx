@@ -40,9 +40,9 @@ const Layout = () => {
   let title = titleMap[pathname] || 'Default Title';
 
   // Handle dynamic routes
-  if (pathname.startsWith('/profile/')) {
+  if (pathname.startsWith('/insider/profile/')) {
     title = `Writer Profile`;
-  } else if (pathname.startsWith('/blogContent/')) {
+  } else if (pathname.startsWith('/insider/blogContent/')) {
     title = `Blog Content`;
   }
 
@@ -52,28 +52,28 @@ const Layout = () => {
   return (
     <>
       {(
-        pathname === "/" ||
-        pathname === "/login" ||
-        pathname === "/signup" ||
-        pathname === "/blogs" ||
-        pathname.startsWith("/setting") ||
-        pathname === "/write" ||
-        pathname.startsWith("/edit") ||
-        pathname.startsWith('/blogContent/') ||
-        pathname.startsWith('/profile/')
+        pathname === "/insider" ||
+        pathname === "/insider/login" ||
+        pathname === "/insider/signup" ||
+        pathname === "/insider/blogs" ||
+        pathname.startsWith("/insider/setting") ||
+        pathname === "/insider/write" ||
+        pathname.startsWith("/insider/edit") ||
+        pathname.startsWith('/insider/blogContent/') ||
+        pathname.startsWith('/insider/profile/')
       ) && <Header />}
 
       <Routes>
-        <Route path="/" element={<LandingPage/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/signup" element={<Signup/>} />
-        <Route path="/blogs" element={<ProtectedRoute><BlogList/></ProtectedRoute>} />
-        <Route path="/profile/:authorId" element={<ProtectedRoute><WriterProfile/></ProtectedRoute>} />
-        <Route path="/setting/:authorId" element={<ProtectedRoute><ProfileSetting/></ProtectedRoute>} />
-        <Route path="/blogContent/:blogId" element={<ProtectedRoute><BlogContent/></ProtectedRoute>} />
-        <Route path="/write" element={<ProtectedRoute><BlogEditor/></ProtectedRoute>} />
-        <Route path="/edit/:blogId" element={<ProtectedRoute><EditBlog/></ProtectedRoute>} />
-        <Route path="/authFailed" element={<AuthFailed/>} />
+        <Route path="/insider" element={<LandingPage/>} />
+        <Route path="/insider/login" element={<Login/>} />
+        <Route path="/insider/signup" element={<Signup/>} />
+        <Route path="/insider/blogs" element={<ProtectedRoute><BlogList/></ProtectedRoute>} />
+        <Route path="/insider/profile/:authorId" element={<ProtectedRoute><WriterProfile/></ProtectedRoute>} />
+        <Route path="/insider/setting/:authorId" element={<ProtectedRoute><ProfileSetting/></ProtectedRoute>} />
+        <Route path="/insider/blogContent/:blogId" element={<ProtectedRoute><BlogContent/></ProtectedRoute>} />
+        <Route path="/insider/write" element={<ProtectedRoute><BlogEditor/></ProtectedRoute>} />
+        <Route path="/insider/edit/:blogId" element={<ProtectedRoute><EditBlog/></ProtectedRoute>} />
+        <Route path="/insider/authFailed" element={<AuthFailed/>} />
         <Route path="*" element={<Error404/>} />
       </Routes>
     </>

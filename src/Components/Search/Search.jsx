@@ -164,7 +164,7 @@ const Search = ({ text }) => {
 
                <div className='gap-10 flex flex-wrap items-center place-content-center'>
                     {loadBlog && filteredBlogs?.map((items, index) => (
-                         <Link to={`/blogContent/${items._id}`} key={index} className="w-11/12 lg:w-1/5">
+                         <Link to={`/insider/blogContent/${items._id}`} key={index} className="w-11/12 lg:w-1/5">
                               <div className="shadow-md border border-gray-200 rounded-lg max-w-sm">
                                    <img className="rounded-t-lg h-48 w-full" src={items?.blogPhoto} onError={(e) => e.target.src = blogImageErr} alt="imageError" />
                                    <div className='flex items-center space-x-2 mt-3 pl-5'>

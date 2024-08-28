@@ -46,7 +46,7 @@ const WriterList = () => {
                                    <div className="font-medium">{items?.firstName} {items?.lastName}</div>
                                    <div className="text-gray-600 text-[10px] bg-gray-300 w-fit rounded-full px-[5px] py-.5 capitalize">{items?.userName}</div>
                               </div>
-                              <Link to={`/profile/${items?._id}`} className="text-white text-xs px-8 select-none py-2 rounded-full bg-[#34ab45] hover:opacity-80 font-medium">Vist</Link>
+                              <Link to={`/insider/profile/${items?._id}`} className="text-white text-xs px-8 select-none py-2 rounded-full bg-[#34ab45] hover:opacity-80 font-medium">Vist</Link>
                          </div>
                     </li>
                ))}

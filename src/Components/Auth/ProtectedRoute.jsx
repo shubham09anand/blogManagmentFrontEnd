@@ -15,11 +15,11 @@ const ProtectedRoute = ({ children }) => {
             dispatcher(setLoginData({ token: token, userId: id }));
             return children;
         } else {
-            window.location.href = ("/authFailed");
+            window.location.href = ("/insider/authFailed");
             return null;
         }
     } else {
-        window.location.href = ("/authFailed");
+        window.location.href = ("/insider/authFailed");
         return null;
     }
 };

@@ -42,8 +42,8 @@ const BlogContent = () => {
                                    <header className="mb-4 lg:mb-6 not-format">
                                         <h1 className="mb-4 text-5xl lg:text-7xl font-extrabold leading-tight text-gray-900 lg:mb-6">{blog?.title}</h1>
                                         <address className="flex items-center mb-6 not-italic">
-                                             <div to={`/profile/${"authorId"}`} className="inline-flex items-center mr-3 text-sm text-gray-900">
-                                                  <Link to={`/profile/${blog?.authorId}`}>
+                                             <div className="inline-flex items-center mr-3 text-sm text-gray-900">
+                                                  <Link to={`/insider/profile/${blog?.authorId}`}>
                                                        <img className="mr-4 w-20 h-20 rounded-full border-2 border-black" src={blog?.photo && blog?.photo?.trim() !== "" ? blog?.photo : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} alt="profileImage" />
                                                   </Link>
                                                   <div>
