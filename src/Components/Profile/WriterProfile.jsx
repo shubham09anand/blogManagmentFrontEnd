@@ -182,11 +182,11 @@ const WriterProfile = () => {
                          <div className="bg-white p-3">
                               <div className='flex gap-x-5 place-content-center items-center mb-5'>
                                    <div className="image overflow-hidden">
-                                        <img className="hidden lg:block flex-shrink-0 object-cover rounded-full w-48 h-48 bg-gray-500 border-2 border-black" src={userProfile?.photo.length > 0 ? userProfile?.photo[0]?.trim() : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} alt="imageError" />
+                                        <img className="hidden lg:block flex-shrink-0 object-cover rounded-full w-32 h-32 xl:h-44 xl:w-44 bg-gray-500 border-2 border-black" src={userProfile?.photo.length > 0 ? userProfile?.photo[0]?.trim() : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} alt="imageError" />
                                         <img className="block lg:hidden flex-shrink-0 object-cover rounded-full w-28 h-28 element-500:h-400  element-500:w-400 sm:w-36 sm:h-36 bg-gray-500" src={userProfile?.photo.length > 0 ? userProfile?.photo[0]?.trim() : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} alt="imageError" />
                                    </div>
                                    <div>
-                                        <h1 className="text-gray-900 font-bold text-2xl md:text-3xl leading-8 my-1 capitalize">{userProfile?.firstName} {userProfile?.lastName}</h1>
+                                        <h1 className="text-gray-900 font-bold text-2xl md:text-3xl lg:text-2xl leading-8 my-1 capitalize">{userProfile?.firstName} {userProfile?.lastName}</h1>
                                         <h3 className="text-gray-900 font-lg text-semibold leading-6 capitalize bg-gray-200 w-fit h-fit px-2 rounded-full font-bold">{userProfile?.pronouns.length > 0 ? userProfile?.pronouns : null}</h3>
                                         {userProfile?.userName === "@shubham" && (
                                              <>
