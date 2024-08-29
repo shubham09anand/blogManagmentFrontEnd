@@ -22,7 +22,7 @@ const Error_404 = () => {
           <div className="flex flex-col items-stretch">
             {/* Home Page Navigation */}
             <div
-              className="flex flex-row group px-4 py-8 border-t hover:cursor-pointer transition-all duration-200 delay-100" onClick={() => navigate('/')}>
+              className="flex flex-row group px-4 py-8 border-t hover:cursor-pointer transition-all duration-200 delay-100" onClick={() => navigate('/insider')}>
               <div className="rounded-xl flex place-content-center items-center w-16 h-16 px-3 bg-[#16831f] py-2 md:py-4">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="white" className="size-6"
                 >

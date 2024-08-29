@@ -48,7 +48,7 @@ const Layout = () => {
 
   // Set document title
   useDocumentTitle(title);
-  
+
   return (
     <>
       {(
@@ -63,19 +63,19 @@ const Layout = () => {
         pathname.startsWith('/insider/profile/')
       ) && <Header />}
 
-      <Routes>
-        <Route path="/insider" element={<LandingPage/>} />
-        <Route path="/insider/login" element={<Login/>} />
-        <Route path="/insider/signup" element={<Signup/>} />
-        <Route path="/insider/blogs" element={<ProtectedRoute><BlogList/></ProtectedRoute>} />
-        <Route path="/insider/profile/:authorId" element={<ProtectedRoute><WriterProfile/></ProtectedRoute>} />
-        <Route path="/insider/setting/:authorId" element={<ProtectedRoute><ProfileSetting/></ProtectedRoute>} />
-        <Route path="/insider/blogContent/:blogId" element={<ProtectedRoute><BlogContent/></ProtectedRoute>} />
-        <Route path="/insider/write" element={<ProtectedRoute><BlogEditor/></ProtectedRoute>} />
-        <Route path="/insider/edit/:blogId" element={<ProtectedRoute><EditBlog/></ProtectedRoute>} />
-        <Route path="/insider/authFailed" element={<AuthFailed/>} />
-        <Route path="*" element={<Error404/>} />
-      </Routes>
+        <Routes>
+          <Route path="/insider" element={<LandingPage />} />
+          <Route path="/insider/login" element={<Login />} />
+          <Route path="/insider/signup" element={<Signup />} />
+          <Route path="/insider/blogs" element={<ProtectedRoute><BlogList /></ProtectedRoute>} />
+          <Route path="/insider/profile/:authorId" element={<ProtectedRoute><WriterProfile /></ProtectedRoute>} />
+          <Route path="/insider/setting/:authorId" element={<ProtectedRoute><ProfileSetting /></ProtectedRoute>} />
+          <Route path="/insider/blogContent/:blogId" element={<ProtectedRoute><BlogContent /></ProtectedRoute>} />
+          <Route path="/insider/write" element={<ProtectedRoute><BlogEditor /></ProtectedRoute>} />
+          <Route path="/insider/edit/:blogId" element={<ProtectedRoute><EditBlog /></ProtectedRoute>} />
+          <Route path="/insider/authFailed" element={<AuthFailed />} />
+          <Route path="*" element={<Error404 />} />
+        </Routes>
     </>
   );
 };

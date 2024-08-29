@@ -24,7 +24,6 @@ const BlogList = () => {
                     if (response.data.response.success) {
                          setBlogs(response.data.response.response);
                          setLoad(true)
-                         console.log(blogs)
                          // console.log(response.data.response.response);
                     } else {
                          toast.error("Failed to Load Blogs");
