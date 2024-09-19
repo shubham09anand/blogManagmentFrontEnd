@@ -23,7 +23,9 @@ const BlogList = () => {
                     const response = await API.post('/getAllBlogs');
                     if (response.data.response.success) {
                          setBlogs(response.data.response.response);
-                         setLoad(true)
+                         setTimeout(() => {
+                              setLoad(true)
+                         }, 100000);
                          // console.log(response.data.response.response);
                     } else {
                          toast.error("Failed to Load Blogs");
