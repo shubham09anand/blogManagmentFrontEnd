@@ -32,8 +32,6 @@ const Header = () => {
           }
      }, [userId]);
 
-
-
      return (
           <header className={`header sticky top-0 z-20 bg-[#f7f4ed] shadow-md flex items-center justify-between px-4 md:px-8 ${currentLocation === "/insider" || currentLocation === "/insider/signup" || currentLocation === "/insider/login" ? 'py-3' : 'py-0'}`}>
                <div className='text-4xl font-bold tracking-tighter'>Insider</div>
