@@ -27,13 +27,13 @@ const Layout = () => {
 
   // Define titles for static routes
   const titleMap = {
-    '/': 'Insider',
-    '/login': 'Insider',
-    '/signup': 'Insider',
-    '/blogs': 'Blog List',
-    '/setting': 'Profile Settings',
-    '/write': 'Write Blog',
-    '/edit': 'Edit Blog',
+    '/insider': 'Insider',
+    '/insider/login': 'Insider',
+    '/insider/signup': 'Insider',
+    '/insider/blogs': 'Blog List',
+    '/insider/setting': 'Profile Settings',
+    '/insider/write': 'Write Blog',
+    '/insider/edit': 'Edit Blog',
   };
 
   // Default title for non-matched routes
