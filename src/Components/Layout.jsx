@@ -31,7 +31,6 @@ const Layout = () => {
     '/insider/login': 'Insider',
     '/insider/signup': 'Insider',
     '/insider/blogs': 'Blogs',
-    '/insider/setting': 'Profile Settings',
     '/insider/write': 'Write Blog',
     '/insider/edit': 'Edit Blog',
   };
@@ -44,6 +43,8 @@ const Layout = () => {
     title = `Writer Profile`;
   } else if (pathname.startsWith('/insider/blogContent/')) {
     title = `Blog Content`;
+  }else if (pathname.startsWith('/insider/setting')){
+    title = `Setting`;
   }
 
   // Set document title
