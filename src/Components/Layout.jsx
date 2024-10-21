@@ -30,7 +30,7 @@ const Layout = () => {
     '/insider': 'Insider',
     '/insider/login': 'Insider',
     '/insider/signup': 'Insider',
-    '/insider/blogs': 'Blog List',
+    '/insider/blogs': 'Blogs',
     '/insider/setting': 'Profile Settings',
     '/insider/write': 'Write Blog',
     '/insider/edit': 'Edit Blog',
