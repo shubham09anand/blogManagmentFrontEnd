@@ -35,114 +35,114 @@ const CreateProfile = () => {
           }
      };
 
-      // Validate inputs before making the API call
-      const validateInputs = () => {
+     // Validate inputs before making the API call
+     const validateInputs = () => {
           if (!firstName.trim()) {
-              toast.info("First name is required.");
-              return false;
+               toast.info("First name is required.");
+               return false;
           }
           if (!lastName.trim()) {
-              toast.info("Last name is required.");
-              return false;
+               toast.info("Last name is required.");
+               return false;
           }
           if (!email.trim()) {
-              toast.info("Email is required.");
-              return false;
+               toast.info("Email is required.");
+               return false;
           }
           if (!pronouns.trim()) {
-              toast.info("Pronouns are required.");
-              return false;
+               toast.info("Pronouns are required.");
+               return false;
           }
           if (tags.length === 0 || tags.every(tag => !tag.trim())) {
-              toast.info("At least one tag is required.");
-              return false;
+               toast.info("At least one tag is required.");
+               return false;
           }
           return true;
-      };
+     };
 
-      const handleSubmit = async (e) => {
+     const handleSubmit = async (e) => {
           e.preventDefault();
-      
+
           if (!validateInputs()) {
-              return;
+               return;
           }
-      
+
           if (!authorId) {
-              toast.error("Author ID is missing");
-              return;
+               toast.error("Author ID is missing");
+               return;
           }
-      
+
           const formData = {
-              firstName: firstName,
-              lastName: lastName,
-              userProfile: {
-                  userId: authorId,
-                  email: email,
-                  phone: phone,
-                  pronouns: pronouns,
-                  interestedTopics: tags.join(', '), // Convert tags array to a comma-separated string
-                  aboutYou: aboutYou,
-                  photo: image,
-              },
+               firstName: firstName,
+               lastName: lastName,
+               userProfile: {
+                    userId: authorId,
+                    email: email,
+                    phone: phone,
+                    pronouns: pronouns,
+                    interestedTopics: tags.join(', '), // Convert tags array to a comma-separated string
+                    aboutYou: aboutYou,
+                    photo: image,
+               },
           };
-      
+
           try {
-              const response = await API.post('/updateProfile', formData);
-              if (response.data.response.success) {
-                  toast.success("Profile updated successfully!");
-              } else {
-                  toast.error("Failed to update profile");
-              }
+               const response = await API.post('/updateProfile', formData);
+               if (response.data.response.success) {
+                    toast.success("Profile updated successfully!");
+               } else {
+                    toast.error("Failed to update profile");
+               }
           } catch (error) {
-              toast.error("Error submitting profile");
+               toast.error("Error submitting profile");
           }
-      };
-      
-      const handleImageChange = (e) => {
+     };
+
+     const handleImageChange = (e) => {
           const file = e.target.files[0];
           if (file) {
-              const reader = new FileReader();
-              
-              reader.onloadend = () => {
-                  // Convert the file to base64 string
-                  const base64String = reader.result;
-                  setImage(base64String);
-              };
-      
-              reader.readAsDataURL(file);
+               const reader = new FileReader();
+
+               reader.onloadend = () => {
+                    // Convert the file to base64 string
+                    const base64String = reader.result;
+                    setImage(base64String);
+               };
+
+               reader.readAsDataURL(file);
           }
-      };
+     };
 
      useEffect(() => {
           const getUserProfile = async () => {
-              try {
-                  const response = await API.get(`/getWriterProfile/${authorId}`);
-                  if (response.data.response.success) {
-                      const userProfile = response.data.response.response[0];
-                      
-                      setFirstName(userProfile.firstName || '');
-                      setLastName(userProfile.lastName || '');
-                      setEmail(userProfile.email.length > 0 ? userProfile.email[0] : '');
-                      setPhone(userProfile.phone.length > 0 ? userProfile.phone[0] : '');
-                      setPronouns(userProfile.pronouns.length > 0 ? userProfile.pronouns[0] : '');
-                      setAboutYou(userProfile.aboutYou.length > 0 ? userProfile.aboutYou[0] : '');
-                      setImage(userProfile.photo.length > 0 ? userProfile.photo[0] : '');
-      
-                      // Handling interestedTopics
-                      const tagsArray = userProfile.interestedTopics.length > 0 ? userProfile.interestedTopics[0].split(',').map(tag => tag.trim()) : [];
-                      setTags(tagsArray);
-                  }
-              } catch (err) {
-                  toast.error("Failed to Load Profile");
-                  // console.log(err);
-              }
+               try {
+                    const response = await API.get(`/getWriterProfile/${authorId}`);
+                    if (response.data.response.success) {
+                         const userProfile = response.data.response.response[0];
+
+                         setFirstName(userProfile.firstName || '');
+                         setLastName(userProfile.lastName || '');
+                         setEmail(userProfile.email.length > 0 ? userProfile.email[0] : '');
+                         setPhone(userProfile.phone.length > 0 ? userProfile.phone[0] : '');
+                         setPronouns(userProfile.pronouns.length > 0 ? userProfile.pronouns[0] : '');
+                         setAboutYou(userProfile.aboutYou.length > 0 ? userProfile.aboutYou[0] : '');
+                         setImage(userProfile.photo.length > 0 ? userProfile.photo[0] : '');
+
+                         // Handling interestedTopics
+                         const tagsArray = userProfile.interestedTopics.length > 0 ? userProfile.interestedTopics[0].split(',').map(tag => tag.trim()) : [];
+                         setTags(tagsArray);
+                    }
+               } catch (err) {
+                    toast.error("Failed to Load Profile");
+                    // console.log(err);
+               }
           };
-      
+
           if (authorId) {
-              getUserProfile();
+               getUserProfile();
           }
-      }, [authorId]);
-      
+     }, [authorId]);
+
 
 
      return (
@@ -152,7 +152,7 @@ const CreateProfile = () => {
                <form onSubmit={handleSubmit}>
                     <div className="mb-5 relative border-4 border-white rounded-full sm:flex">
                          <div className='w-fit h-fit rounded-full bg-gray-300 border border-black'>
-                              <img className="object-scale-down w-32 h-32 rounded-full" src={image} onError={(e)=>e.target.src=noProfileImage} alt='ProfileImage' />
+                              <img className="object-scale-down w-32 h-32 rounded-full" src={image} onError={(e) => e.target.src = noProfileImage} alt='ProfileImage' />
                          </div>
                          <div className='sm:pl-5 my-auto'>
                               <label className="block mb-2" htmlFor="file_input">Upload file</label>
