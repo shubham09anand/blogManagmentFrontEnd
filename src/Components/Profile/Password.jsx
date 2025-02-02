@@ -13,7 +13,7 @@ const Password = () => {
           if (!userId) {
                toast.info("Something went wrong.");
                return;
-           }
+          }
           if (!newPassword.trim()) {
                toast.info("Password is required");
                return;

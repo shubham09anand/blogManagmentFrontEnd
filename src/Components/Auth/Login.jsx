@@ -35,29 +35,26 @@ const Login = () => {
           setButton(true);
           try {
                const response = await API.post("/login", {
-                    "userName":userName,
-                    "password":password
-                });
-               if (response.data.response.success && response.data.response.status === 200) {
-                    localStorage.setItem('user_Id_BlogMangement', response.data.response.response.id);
-                    localStorage.setItem('user_Token_BlogMangement', response.data.response.response.token);
-                    dispatch(setLoginData({ token: response.data.response.response.token, userId: response.data.response.response.id }));
+                    "userName": userName,
+                    "password": password
+               });
+               if (response?.data?.response?.success && response?.data?.response?.status === 200) {
+                    localStorage.setItem('user_Id_BlogMangement', response?.data?.response?.response?.id);
+                    localStorage.setItem('user_Token_BlogMangement', response?.data?.response?.response?.token);
+                    dispatch(setLoginData({ token: response?.data?.response?.response?.token, userId: response?.data?.response?.response?.id }));
                     setLogin(false)
                     navigate("/insider/blogs")
                }
-               else if(response.data.response.success === false){
-                    setLogin(true)
+               else if (response?.data?.response?.success === false) {
+                    setLogin(true);
+                    setTimeout(() => {
+                         setLogin(false)
+                    }, 2500);
                }
           } catch (err) {
                console.error(err);
-               setButton(false)
-               setLogin(true)
           } finally {
-               if (!logIn) {
-                    setButton(false);
-               }else if(logIn){
-                    setButton(true)
-               }
+               setButton(false)
           }
      };
 
@@ -79,8 +76,8 @@ const Login = () => {
                               </svg>
                               <input onChange={(e) => setPassword(e.target.value)} value={password} className="pl-2 outline-none border-none bg-transparent focus:bg-transparent active:bg-transparent w-full placeholder:text-gray-700" type="password" name="" id="Password" placeholder="Password" />
                          </div>
-                         {logIn && (<div className='text-sm teact-balck tracking-tight text-center'>Wrong Credentials</div>)}
-                         <button disabled={button} onClick={tryLogin} className={`block w-full bg-[#34ab45] py-2 rounded-sm text-white font-semibold mt-8 active:opacity-20 ${button ? "cursor-not-allowed opacity-50":"cursor-pointer"}`}>Log In</button>
+                         {logIn && (<div className='text-sm teact-balck tracking-tight text-center text-red-500 italic'>Wrong Credentials</div>)}
+                         <button disabled={button} onClick={tryLogin} className={`block w-full bg-[#34ab45] py-2 rounded-sm text-white font-semibold mt-8 active:opacity-20 ${button ? "cursor-not-allowed opacity-25 animate-pulse" : "cursor-pointer"}`}>Log In</button>
                     </div>
                </div>
                <div className="lg:mt-0 lg:col-span-5 lg:flex absolute -z-0 top-0 right-0 opacity-50 md:opacity-75 lg:opacity-100">

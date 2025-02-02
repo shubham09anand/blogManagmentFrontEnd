@@ -52,7 +52,7 @@ const BlogList = () => {
                               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                          </svg>
 
-                         <input onChange={(e)=>setSearchText(e.target.value)} value={searchText} onFocus={() => setFocous(true)} className="bg-transparent outline-none w-3/5" type="text" placeholder="Article name ..." id="searchByTitle" />
+                         <input onChange={(e) => setSearchText(e.target.value)} value={searchText} onFocus={() => setFocous(true)} className="bg-transparent outline-none w-3/5" type="text" placeholder="Article name ..." id="searchByTitle" />
                     </div>
 
                     <div className={`absolute -translate-x-[44px] sm:-translate-x-[52px] md:-translate-x-[64px] lg:-translate-x-[178px] mt-20 top-0 left-0 h-screen w-screen z-50 ${focus ? "block" : "hidden"}`}>
@@ -62,31 +62,32 @@ const BlogList = () => {
                </div>
 
 
-               <div className={`flex lg:px-40 mt-5 ${!focus ? "block" : "hidden"}`}>
-                    <div className='lg:w-2/3 p-2 gap-y-4'>
+               <div className={`flex snap-x snap-mandatory example overflow-y-hidden overflow-x-scroll lg:px-40 mt-5 ${!focus ? "block" : "hidden"}`}>
+                    <div className='divide-y-[1px] snap-center h-[80vh] example overflow-y-scroll examaple flex-shrink-0 w-[90%] border-r-[1px] border-r-black/50 lg:w-2/3 p-2 gap-y-4'>
                          {load && blogs?.map((items, key) => (
-                              <div key={key}>
-                                   <div className="flex justify-start gap-2 flex-wrap pt-4 pl-4">
+                              <div className='w-full' key={key}>
+                                   <div className="flex justify-start gap-2 flex-wrap pt-4">
                                         {items?.tags.slice(0, 3).map((i, e) => (
                                              <span key={e} className="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-800">{i}</span>
                                         ))}
                                    </div>
-                                   <div className='border-gray-200 w-full flex pb-5 00 border-b-2 border-opacity-35'>
-                                        <div>
-                                             <div className="flex items-center mb-2 pl-4 py-4">
-                                                  <img src={items?.photo && items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} onError={(e)=> e.target.src = noProfilePhoto} className="h-8 w-8 rounded-full mr-2 object-cover border-2 border-black" alt="err" />
-                                                  <Link to={`/insider/profile/${items?.authorId}`} className='flex place-content-center items-center space-x-6'>
-                                                       <p className="fontTitle font-semibold text-sm capitalize">{items?.firstName} {items?.lastName}</p>
-                                                       <p className="fontTitle text-sm font-medium">{moment(items?.createdAt).format('MMMM Do YYYY')}</p>
+                                   <div className='border-gray-200 w-full flex pb-5 border-opacity-35'>
+                                        <div className='w-full sm:pr-4'>
+                                             <div className="flex items-center mb- pl-1 py-4">
+                                                  <img src={items?.photo && items?.photo?.trim() !== "" ? items?.photo : noProfilePhoto} onError={(e) => e.target.src = noProfilePhoto} className="h-8 w-8 rounded-full mr-2 object-cover border-2 border-black" alt="err" />
+                                                  <Link to={`/insider/profile/${items?.authorId}`} className='justify-between w-full flex place-content-center items-center space-x-6'>
+                                                       <p className="fontTitle font-semibold text-sm capitalize truncate w-fit max-w-44">{items?.firstName} {items?.lastName}</p>
+                                                       <p className="fontTitle font-semibold text-sm capitalize truncate w-fit max-w-44"></p>
+                                                       <p className="fontTitle text-sm font-medium">{moment(items?.createdAt).format('MMM Do YYYY')}</p>
                                                   </Link>
                                              </div>
-                                             <Link to={`/insider/blogContent/${items?._id}`} className=" rounded px-4 leading-normal w-full flex">
-                                                  <img className="shadow-[1px_1px_5px_gray] md:rounded-md mr-5 h-16 w-24 md:h-40 md:w-60 flex-none bg-cover overflow-hidden" src={items?.blogPhoto} onError={(e)=>e.target.src = blogImageErr} alt="imageError"/>
+                                             <Link to={`/insider/blogContent/${items?._id}`} className=" rounded px-1.5 lg:pr-4 leading-normal w-full flex">
+                                                  {(items?.blogPhoto.length > 0 ) && (<img className="shadow-[1px_1px_5px_gray] md:rounded-md mr-5 h-16 w-24 md:h-40 md:w-60 flex-none bg-cover overflow-hidden" src={items?.blogPhoto} onError={(e) => e.target.src = blogImageErr} alt="imageError" />)}
                                                   <div>
-                                                       <div className="md:mt-0 font-bold md:text-lg lg:text-2xl line-clamp-1 md:line-clamp-2" style={{ fontFamily: "sohne, Helvetica Neue, Helvetica, Arial, sans-serif" }}>
+                                                       <div className="md:mt-0 font-bold text-lg lg:text-2xl line-clamp-1 md:line-clamp-2" style={{ fontFamily: "sohne, Helvetica Neue, Helvetica, Arial, sans-serif" }}>
                                                             {items?.title}
                                                        </div>
-                                                       <p className="text-base line-clamp-2 md:line-clamp-4 lg:line-clamp-3 text-gray-800" dangerouslySetInnerHTML={{ __html: items?.content }}>                                                            
+                                                       <p className="text-sm line-clamp-2 md:line-clamp-4 lg:line-clamp-3 text-gray-600" dangerouslySetInnerHTML={{ __html: items?.content }}>
                                                        </p>
                                                   </div>
                                              </Link>
@@ -95,7 +96,7 @@ const BlogList = () => {
                               </div>
                          ))}
                          {!load && Array.from({ length: 4 }).map((_, index) => (
-                               <LoadBlog key={index} />
+                              <LoadBlog key={index} />
                          ))}
                     </div>
                     <SideBar />
