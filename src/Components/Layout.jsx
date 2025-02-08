@@ -69,9 +69,9 @@ const Layout = () => {
           <Route path="/insider/login" element={<Login />} />
           <Route path="/insider/signup" element={<Signup />} />
           <Route path="/insider/blogs" element={<ProtectedRoute><BlogList /></ProtectedRoute>} />
-          <Route path="/insider/profile/:authorId" element={<ProtectedRoute><WriterProfile /></ProtectedRoute>} />
+          <Route path="/insider/profile/:authorId" element={<><WriterProfile /></>} />
           <Route path="/insider/setting/:authorId" element={<ProtectedRoute><ProfileSetting /></ProtectedRoute>} />
-          <Route path="/insider/blogContent/:blogId" element={<ProtectedRoute><BlogContent /></ProtectedRoute>} />
+          <Route path="/insider/blogContent/:blogId" element={<><BlogContent /></>} />
           <Route path="/insider/write" element={<ProtectedRoute><BlogEditor /></ProtectedRoute>} />
           <Route path="/insider/edit/:blogId" element={<ProtectedRoute><EditBlog /></ProtectedRoute>} />
           <Route path="/insider/authFailed" element={<AuthFailed />} />

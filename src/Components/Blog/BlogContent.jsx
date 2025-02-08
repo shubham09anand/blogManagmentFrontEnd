@@ -7,9 +7,11 @@ import LoadingBlog from '../Animation/LoadingBlog';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 const BlogContent = () => {
      const noProfilePhoto = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+     const userId = useSelector((state) => state.LoginSlice.loggedUserId)
      const { blogId } = useParams();
      const [blog, setBlog] = useState([]);
      const [load, setLoad] = useState(true);
@@ -38,9 +40,9 @@ const BlogContent = () => {
                {!load && (
                     <div className="w-full lg:w-1/2 mx-auto flex flex-col place-content-center items-center pt-8 pb-16 lg:pt-16 bg-white antialiased">
                          <div className="flex flex-col justify-between px-4 mx-auto max-w-screen-xl ">
-                              <article className="mx-auto w-full format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+                              <article className="mx-auto md:min-w-[600px] format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
                                    <header className="mb-4 lg:mb-6 not-format">
-                                        <h1 className="mb-4 text-5xl lg:text-7xl font-extrabold leading-tight text-gray-900 lg:mb-6">{blog?.title}</h1>
+                                        <h1 className={`mb-4 font-extrabold leading-tight text-gray-900 lg:mb-6 ${blog?.title.length < 10 ? 'text-5xl lg:text-7xl' : 'text-2xl md:text-4xl' }`}>{blog?.title}</h1>
                                         <address className="flex items-center mb-6 not-italic">
                                              <div className="inline-flex items-center mr-3 text-sm text-gray-900">
                                                   <Link to={`/insider/profile/${blog?.authorId}`}>
@@ -93,8 +95,13 @@ const BlogContent = () => {
                                              <span key={e} className="bg-gray-200 rounded-full px-5 py-1 text-sm font-semibold text-gray-800">{i}</span>
                                         ))}
                                    </div>
-                                   <Comment />
-                                   <MakeComment />
+                                   {userId !== null ? (
+                                        <>
+                                             <Comment />
+                                             <MakeComment />
+                                        </>
+                                   ): <div className='text-gray-700 font-thin text-center'>Login to read and make comments</div>}
+                                   
                               </article>
                          </div>
                     </div>

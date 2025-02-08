@@ -63,7 +63,7 @@ const BlogList = () => {
 
 
                <div className={`flex snap-x snap-mandatory example overflow-y-hidden overflow-x-scroll lg:px-40 mt-5 ${!focus ? "block" : "hidden"}`}>
-                    <div className='divide-y-[1px] snap-center h-[80vh] example overflow-y-scroll examaple flex-shrink-0 w-[90%] border-r-[1px] border-r-black/50 lg:w-2/3 p-2 gap-y-4'>
+                    <div className='divide-y-[1px] snap-center h-[80vh] example overflow-y-scroll examaple flex-shrink-0 w-[95%] border-r-[1px] border-r-black/50 lg:w-2/3 p-2 gap-y-4'>
                          {load && blogs?.map((items, key) => (
                               <div className='w-full' key={key}>
                                    <div className="flex justify-start gap-2 flex-wrap pt-4">
