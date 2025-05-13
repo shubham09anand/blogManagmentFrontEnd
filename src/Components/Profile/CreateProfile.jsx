@@ -151,8 +151,8 @@ const CreateProfile = () => {
                <h1 className="text-2xl font-bold text-gray-800 mb-4">Profile</h1>
                <form onSubmit={handleSubmit}>
                     <div className="mb-5 relative border-4 border-white rounded-full sm:flex">
-                         <div className='w-fit h-fit rounded-full bg-gray-300 border border-black'>
-                              <img className="object-scale-down w-32 h-32 rounded-full" src={image} onError={(e) => e.target.src = noProfileImage} alt='ProfileImage' />
+                         <div className='w-fit h-fit rounded-full shadow-lg shadow-black/20'>
+                              <img className="object-scale-down w-32 h-32 rounded-full" src={image} onError={(e) => { e.target.src = noProfileImage; }} alt="ProfileImage"/>
                          </div>
                          <div className='sm:pl-5 my-auto'>
                               <label className="block mb-2" htmlFor="file_input">Upload file</label>
