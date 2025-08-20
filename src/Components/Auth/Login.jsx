@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LandingPagePhoto from "../../Assets/LandingPage.webp"
 import { toast, ToastContainer } from 'react-toastify';
 import { useDispatch } from "react-redux";
@@ -57,6 +57,21 @@ const Login = () => {
                setButton(false)
           }
      };
+
+     useEffect(() => {
+          const user_Id_BlogMangement = localStorage.getItem('user_Id_BlogMangement');
+          const user_Token_BlogMangement = localStorage.getItem('user_Token_BlogMangement');
+          if (user_Id_BlogMangement && user_Token_BlogMangement) {
+               const decodedToken = jwtDecode(user_Token_BlogMangement);
+               if (decodedToken === user_Id_BlogMangement) {
+                    localStorage.setItem('user_Id_BlogMangement', user_Id_BlogMangement);
+                    localStorage.setItem('user_Token_BlogMangement', user_Token_BlogMangement);
+                    navigate("/insider/blogs")
+               }
+          }else{
+               console.log("New Login or user")
+          }
+     }, [])
 
      return (
           <div className="h-screen md:flex bg-[#f7f4ed]">
