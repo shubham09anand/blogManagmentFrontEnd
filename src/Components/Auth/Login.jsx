@@ -60,23 +60,25 @@ const Login = () => {
 
      // new added
 
-     // useEffect(() => {
-     //      console.log("useEffect");
-     //      const user_Id_BlogMangement = localStorage.getItem('user_Id_BlogMangement');
-     //      const user_Token_BlogMangement = localStorage.getItem('user_Token_BlogMangement');
-     //      console.log("cred found");
-     //      if (user_Id_BlogMangement && user_Token_BlogMangement) {
-     //           const decodedToken = jwtDecode(user_Token_BlogMangement);
-     //           if (decodedToken === user_Id_BlogMangement) {
-     //                console.log("Token matched");
-     //                localStorage.setItem('user_Id_BlogMangement', user_Id_BlogMangement);
-     //                localStorage.setItem('user_Token_BlogMangement', user_Token_BlogMangement);
-     //                navigate("/insider/blogs")
-     //           }
-     //      }else{
-     //           console.log("New Login or user")
-     //      }
-     // }, [])
+     useEffect(() => {
+          console.log("useEffect");
+          const user_Id_BlogMangement = localStorage.getItem('user_Id_BlogMangement');
+          const user_Token_BlogMangement = localStorage.getItem('user_Token_BlogMangement');
+          console.log(user_Id_BlogMangement)
+          console.log(user_Token_BlogMangement)
+          // console.log("cred found");
+          // if (user_Id_BlogMangement && user_Token_BlogMangement) {
+          //      const decodedToken = jwtDecode(user_Token_BlogMangement);
+          //      if (decodedToken === user_Id_BlogMangement) {
+          //           console.log("Token matched");
+          //           localStorage.setItem('user_Id_BlogMangement', user_Id_BlogMangement);
+          //           localStorage.setItem('user_Token_BlogMangement', user_Token_BlogMangement);
+          //           navigate("/insider/blogs")
+          //      }
+          // }else{
+          //      console.log("New Login or user")
+          // }
+     }, [])
 
      // new added
 
